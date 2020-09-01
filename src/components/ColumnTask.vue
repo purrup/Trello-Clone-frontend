@@ -15,10 +15,6 @@
 import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin.js'
 
 export default {
-  components: {
-    // AppDrag,
-    // AppDrop
-  },
   props: {
     task: {
       type: Object,
