@@ -1,43 +1,55 @@
 <template>
-  <AppDrop @drop="moveTaskOrColumn">
-    <AppDrag class="column"
-    :transferData="{
-      type: 'column',
-      fromColumnIndex: columnIndex
-      }">
+    <div class="column">
       <div class="flex items-center mb-2 font-bold">
         {{ column.name }}
       </div>
       <div class="list-reset">
-        <ColumnTask v-for="(task, $taskIndex) of column.tasks"
-              :key="$taskIndex"
-              :task="task"
-              :taskIndex="$taskIndex"
-              :column="column"
-              :columnIndex="columnIndex"
-              :board="board" />
+        <draggable v-model="columnTasks"
+          @start="drag = true"
+          @end="drag = false">
+          <ColumnTask v-for="(task, $taskIndex) of column.tasks"
+                :key="$taskIndex"
+                :task="task"
+                :taskIndex="$taskIndex"
+                :column="column"
+                :columnIndex="columnIndex"
+                :board="board" />
+        </draggable>
 
         <input type="text"
                 class="block p-2 w-full bg-transparent"
                 placeholder="+ Enter New Task"
                 @keyup.enter="createTask($event, column.tasks)">
       </div>
-    </AppDrag>
-  </AppDrop>
+    </div>
 </template>
 
 <script>
 import ColumnTask from '@/components/ColumnTask.vue'
-import AppDrag from '@/components/AppDrag.vue'
-import AppDrop from '@/components/AppDrop.vue'
+// import AppDrag from '@/components/AppDrag.vue'
+// import AppDrop from '@/components/AppDrop.vue'
 import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin.js'
+import draggable from 'vuedraggable'
+
 export default {
   components: {
     ColumnTask,
-    AppDrag,
-    AppDrop
+    // AppDrag,
+    // AppDrop,
+    draggable
   },
   mixins: [movingTasksAndColumnsMixin],
+  computed: {
+    columnTasks: {
+      get () {
+        return this.column.tasks
+      },
+      set (value) {
+        const columnIndex = this.columnIndex
+        this.$store.commit('MOVE_TASK', { columnIndex, value })
+      }
+    }
+  },
   methods: {
 
     pickupColumn (e, fromColumnIndex) {
