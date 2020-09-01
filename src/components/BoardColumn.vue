@@ -5,6 +5,7 @@
       </div>
       <div class="list-reset">
         <draggable v-model="columnTasks"
+         :group="{ name: 'tasks-group' }"
           v-bind="dragOptions">
           <transition-group>
             <ColumnTask
@@ -54,7 +55,6 @@ export default {
     }
   },
   methods: {
-
     pickupColumn (e, fromColumnIndex) {
       e.dataTransfer.effectAllowed = 'move'
       e.dataTransfer.dropEffect = 'move'

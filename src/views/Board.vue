@@ -57,7 +57,7 @@ export default {
         return this.board.columns
       },
       set (value) {
-        this.$store.commit('MOVE_COLUMN', value)
+        this.$store.commit('UPDATE_BOARD', value)
       }
     },
     dragOptions () {
@@ -75,6 +75,10 @@ export default {
         name: this.newColumnName
       })
       this.newColumnName = ''
+    },
+    updateBoards () {
+      this.$store.commit('UPDATE_BOARD', this.board.columns)
+      console.log('updateBoards => this.board.columns: ', this.board.columns)
     }
   }
 }

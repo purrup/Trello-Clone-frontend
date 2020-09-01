@@ -45,7 +45,8 @@ export default new Vuex.Store({
     MOVE_TASK (state, { columnIndex, value }) {
       state.board.columns[columnIndex].tasks = value
     },
-    MOVE_COLUMN (state, value) {
+    UPDATE_BOARD (state, value) {
+      console.log('vuex => value: ', value)
       state.board.columns = value
     }
     // MOVE_COLUMN (state, { fromColumnIndex, toColumnIndex }) {
