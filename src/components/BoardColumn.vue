@@ -5,15 +5,19 @@
       </div>
       <div class="list-reset">
         <draggable v-model="columnTasks"
+          v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false">
-          <ColumnTask v-for="(task, $taskIndex) of column.tasks"
-                :key="$taskIndex"
-                :task="task"
-                :taskIndex="$taskIndex"
-                :column="column"
-                :columnIndex="columnIndex"
-                :board="board" />
+          <transition-group>
+            <ColumnTask
+                  v-for="(task, $taskIndex) of column.tasks"
+                  :key="task.id"
+                  :task="task"
+                  :taskIndex="$taskIndex"
+                  :column="column"
+                  :columnIndex="columnIndex"
+                  :board="board" />
+          </transition-group>
         </draggable>
 
         <input type="text"
@@ -26,16 +30,12 @@
 
 <script>
 import ColumnTask from '@/components/ColumnTask.vue'
-// import AppDrag from '@/components/AppDrag.vue'
-// import AppDrop from '@/components/AppDrop.vue'
 import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin.js'
 import draggable from 'vuedraggable'
 
 export default {
   components: {
     ColumnTask,
-    // AppDrag,
-    // AppDrop,
     draggable
   },
   mixins: [movingTasksAndColumnsMixin],
@@ -47,6 +47,11 @@ export default {
       set (value) {
         const columnIndex = this.columnIndex
         this.$store.commit('MOVE_TASK', { columnIndex, value })
+      }
+    },
+    dragOptions () {
+      return {
+        animation: 200
       }
     }
   },

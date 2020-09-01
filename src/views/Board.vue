@@ -1,12 +1,20 @@
 <template>
   <div class="board">
     <div class="flex flex-row items-start">
-      <BoardColumn
-        v-for="(column, $columnIndex) of board.columns"
-        :key="$columnIndex"
-        :column="column"
-        :columnIndex="$columnIndex"
-        :board="board" />
+      <draggable
+        v-model="columns"
+        v-bind="dragOptions"
+        @start="drag = true"
+        @end="drag = false">
+        <transition-group class="flex flex-row items-start">
+          <BoardColumn
+            v-for="(column, $columnIndex) of board.columns"
+            :key="column.name"
+            :column="column"
+            :columnIndex="$columnIndex"
+            :board="board" />
+        </transition-group>
+      </draggable>
 
       <div class="column flex">
         <input v-model="newColumnName"
@@ -29,10 +37,12 @@
 <script>
 import { mapState } from 'vuex'
 import BoardColumn from '@/components/BoardColumn.vue'
+import draggable from 'vuedraggable'
 
 export default {
   components: {
-    BoardColumn
+    BoardColumn,
+    draggable
   },
   data () {
     return {
@@ -43,6 +53,20 @@ export default {
     ...mapState(['board']),
     isTaskOpen () {
       return this.$route.name === 'task'
+    },
+    columns: {
+      get () {
+        return this.board.columns
+      },
+      set (value) {
+        console.log('value:', value)
+        this.$store.commit('MOVE_COLUMN', value)
+      }
+    },
+    dragOptions () {
+      return {
+        animation: 100
+      }
     }
   },
   methods: {
