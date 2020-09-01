@@ -5,9 +5,7 @@
       </div>
       <div class="list-reset">
         <draggable v-model="columnTasks"
-          v-bind="dragOptions"
-          @start="drag = true"
-          @end="drag = false">
+          v-bind="dragOptions">
           <transition-group>
             <ColumnTask
                   v-for="(task, $taskIndex) of column.tasks"

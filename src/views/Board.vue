@@ -3,9 +3,7 @@
     <div class="flex flex-row items-start">
       <draggable
         v-model="columns"
-        v-bind="dragOptions"
-        @start="drag = true"
-        @end="drag = false">
+        v-bind="dragOptions">
         <transition-group class="flex flex-row items-start">
           <BoardColumn
             v-for="(column, $columnIndex) of board.columns"
@@ -59,7 +57,6 @@ export default {
         return this.board.columns
       },
       set (value) {
-        console.log('value:', value)
         this.$store.commit('MOVE_COLUMN', value)
       }
     },
