@@ -1,5 +1,5 @@
 <template>
-    <div class="column">
+    <div class="column cursor-pointer">
       <div class="flex items-center mb-2 font-bold">
         {{ column.name }}
       </div>
@@ -21,7 +21,7 @@
 
         <input type="text"
                 class="block p-2 w-full bg-transparent"
-                placeholder="+ Enter New Task"
+                placeholder="+ Add New Task"
                 @keyup.enter="createTask($event, column.tasks)">
       </div>
     </div>
