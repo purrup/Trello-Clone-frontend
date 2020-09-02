@@ -51,6 +51,9 @@ export default new Vuex.Store({
     REMOVE_TASK (state, { columnIndex, taskIndex }) {
       const taskList = state.board.columns[columnIndex].tasks
       taskList.splice(taskIndex, 1)
+    },
+    REMOVE_COLUMN (state, columnIndex) {
+      state.board.columns.splice(columnIndex, 1)
     }
   }
 })

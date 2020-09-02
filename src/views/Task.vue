@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     updateTaskProperty (e, key) {
-      console.log('updateTaskProperty')
       this.$store.commit('UPDATE_TASK', {
         task: this.task,
         key,

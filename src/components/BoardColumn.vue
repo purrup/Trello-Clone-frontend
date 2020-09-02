@@ -1,7 +1,16 @@
 <template>
     <div class="column cursor-pointer">
-      <div class="flex items-center mb-2 font-bold">
+      <div
+      class="flex justify-between items-center mb-2 font-bold"
+      @mouseover="showRemoveIcon = true"
+      @mouseout="showRemoveIcon = false">
         {{ column.name }}
+        <AppIcon
+        v-show="showRemoveIcon"
+          :icon="['far', 'trash-alt']"
+          @click.stop="removeColumn"
+          class="removeIcon ">
+        </AppIcon>
       </div>
       <div class="list-reset">
         <draggable v-model="columnTasks"
@@ -35,6 +44,11 @@ export default {
   components: {
     ColumnTask,
     draggable
+  },
+  data () {
+    return {
+      showRemoveIcon: false
+    }
   },
   props: {
     column: {
@@ -73,6 +87,10 @@ export default {
         name: event.target.value
       })
       event.target.value = ''
+    },
+    removeColumn () {
+      const columnIndex = this.columnIndex
+      this.$store.commit('REMOVE_COLUMN', columnIndex)
     }
   }
 }
