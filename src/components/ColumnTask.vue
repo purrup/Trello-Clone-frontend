@@ -1,17 +1,17 @@
 <template>
-  <div class="task cursor-pointer transition duration-500 ease-in-out bg-white hover:bg-red-500"
+  <div class="task cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-500"
         @click="goToTask(task)"
         @mouseover="showRemoveIcon = true"
         @mouseout="showRemoveIcon = false">
     <div class="head-wrapper w-full flex flex-row justify-between">
-      <span class="w-auto flex-no-shrink font-bold">
+      <span class="w-auto flex-shrink-0 font-bold">
       {{ task.name }}
       </span>
       <AppIcon
         v-show="showRemoveIcon"
         :icon="['far', 'trash-alt']"
         @click.stop="removeTask"
-        class="removeIcon transition duration-500 ease-in-out">
+        class="removeIcon hover:text-red-500 transition duration-500 ease-in-out">
       </AppIcon>
     </div>
     <AppIcon
@@ -67,15 +67,12 @@ export default {
 
 <style lang="css">
 .task {
-  @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded text-grey-darkest no-underline;
+  @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded text-gray-800 no-underline;
 }
 /* .task:hover {
   background-color: #EDF2F7;
 } */
 .removeIcon {
   transition: all 5s ease-in-out;
-}
-.removeIcon:hover {
-  color: #F56565;
 }
 </style>

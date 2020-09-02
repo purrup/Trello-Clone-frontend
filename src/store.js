@@ -54,6 +54,9 @@ export default new Vuex.Store({
     },
     REMOVE_COLUMN (state, columnIndex) {
       state.board.columns.splice(columnIndex, 1)
+    },
+    UPDATE_BOARD_NAME (state, value) {
+      state.board.name = value
     }
   }
 })

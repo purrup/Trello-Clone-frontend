@@ -5,8 +5,6 @@
 </template>
 
 <style>
-@import 'assets/styles/tailwind.postcss';
-
 body, html {
   height: 100%;
 }

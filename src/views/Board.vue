@@ -1,5 +1,6 @@
 <template>
-  <div class="board">
+  <div class="board bg-blue-500">
+    <AppHeader></AppHeader>
     <div class="flex flex-row items-start">
       <draggable
         v-model="columns"
@@ -17,15 +18,15 @@
       <div class="column flex">
         <input v-model="newColumnName"
                type="text"
-               class="p-2 mr-2 flex-grow"
-               placeholder="New Column Name"
+               class="p-2 mr-2 flex-grow bg-white border-none text-base"
+               placeholder="+ Add New Column"
                @keyup.enter="createColumn">
       </div>
     </div>
 
     <div
       v-if="isTaskOpen"
-      class="task-bg"
+      class="task-bg w-screen h-screen absolute"
       @click.self="close">
       <router-view />
     </div>
@@ -83,16 +84,17 @@ export default {
 <style lang="css">
 
 .column {
-  @apply bg-grey-light p-2 mr-4 text-left shadow rounded;
+  @apply bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
 }
 
 .board {
-  @apply p-4 bg-teal-dark h-full overflow-auto;
+  @apply p-4 h-screen overflow-auto;
 }
 
 .task-bg {
-  @apply pin absolute;
   background: rgba(0,0,0,0.5);
+  top: 0;
+  right: 0;
 }
 </style>

@@ -23,7 +23,7 @@ module.exports = {
         }
       }
     ],
-    "vue/html-closing-bracket-newline": ["off"],
-    "vue/attribute-hyphenation": ["off"]
+    'vue/html-closing-bracket-newline': ['off'],
+    'vue/attribute-hyphenation': ['off']
   }
 }

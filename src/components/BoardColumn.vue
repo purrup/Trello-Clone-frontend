@@ -12,8 +12,9 @@
           class="removeIcon ">
         </AppIcon>
       </div>
-      <div class="list-reset">
-        <draggable v-model="columnTasks"
+      <div>
+        <draggable
+          v-model="columnTasks"
          :group="{ name: 'tasks-group' }"
           v-bind="dragOptions">
           <transition-group>
@@ -29,7 +30,7 @@
         </draggable>
 
         <input type="text"
-                class="block p-2 w-full bg-transparent"
+                class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700"
                 placeholder="+ Add New Task"
                 @keyup.enter="createTask($event, column.tasks)">
       </div>
@@ -98,7 +99,7 @@ export default {
 
 <style lang="css">
 .column {
-  @apply bg-grey-light p-2 mr-4 text-left shadow rounded;
+  @apply bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
 }
 </style>
