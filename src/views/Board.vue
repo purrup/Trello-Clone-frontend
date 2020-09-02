@@ -75,10 +75,6 @@ export default {
         name: this.newColumnName
       })
       this.newColumnName = ''
-    },
-    updateBoards () {
-      this.$store.commit('UPDATE_BOARD', this.board.columns)
-      console.log('updateBoards => this.board.columns: ', this.board.columns)
     }
   }
 }

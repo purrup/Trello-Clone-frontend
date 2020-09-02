@@ -29,7 +29,6 @@
 
 <script>
 import ColumnTask from '@/components/ColumnTask.vue'
-import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin.js'
 import draggable from 'vuedraggable'
 
 export default {
@@ -37,7 +36,20 @@ export default {
     ColumnTask,
     draggable
   },
-  mixins: [movingTasksAndColumnsMixin],
+  props: {
+    column: {
+      type: Object,
+      required: true
+    },
+    columnIndex: {
+      type: Number,
+      required: true
+    },
+    board: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     columnTasks: {
       get () {
@@ -55,13 +67,6 @@ export default {
     }
   },
   methods: {
-    pickupColumn (e, fromColumnIndex) {
-      e.dataTransfer.effectAllowed = 'move'
-      e.dataTransfer.dropEffect = 'move'
-
-      e.dataTransfer.setData('from-column-index', fromColumnIndex)
-      e.dataTransfer.setData('type', 'column')
-    },
     createTask (event, tasks) {
       this.$store.commit('CREATE_TASK', {
         tasks,

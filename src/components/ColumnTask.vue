@@ -12,10 +12,21 @@
 </template>
 
 <script>
-import movingTasksAndColumnsMixin from '@/mixins/movingTasksAndColumnsMixin.js'
 
 export default {
   props: {
+    column: {
+      type: Object,
+      required: true
+    },
+    columnIndex: {
+      type: Number,
+      required: true
+    },
+    board: {
+      type: Object,
+      required: true
+    },
     task: {
       type: Object,
       required: true
@@ -25,7 +36,6 @@ export default {
       required: true
     }
   },
-  mixins: [movingTasksAndColumnsMixin],
   methods: {
     goToTask (task) {
       return this.$router.push({ name: 'task', params: { id: task.id } })
