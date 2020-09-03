@@ -84,11 +84,16 @@ export default {
   },
   methods: {
     createTask (event, tasks) {
-      this.$store.commit('CREATE_TASK', {
-        tasks,
-        name: event.target.value
-      })
-      event.target.value = ''
+      if (event.target.value === '') {
+        // if user does not key in any word, blur the input
+        return event.target.blur()
+      } else {
+        this.$store.commit('CREATE_TASK', {
+          tasks,
+          name: event.target.value
+        })
+        event.target.value = ''
+      }
     },
     removeColumn () {
       const columnIndex = this.columnIndex

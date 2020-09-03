@@ -16,8 +16,7 @@
       </draggable>
 
       <div class="column flex">
-        <input v-model="newColumnName"
-               type="text"
+        <input type="text"
                class="p-2 mr-2 flex-grow bg-white border-none text-base"
                placeholder="+ Add New Column"
                @keyup.enter="createColumn">
@@ -43,11 +42,6 @@ export default {
     BoardColumn,
     draggable
   },
-  data () {
-    return {
-      newColumnName: ''
-    }
-  },
   computed: {
     ...mapState(['board']),
     isTaskOpen () {
@@ -71,11 +65,16 @@ export default {
     close () {
       return this.$router.push({ name: 'board' })
     },
-    createColumn () {
-      this.$store.commit('CREATE_COLUMN', {
-        name: this.newColumnName
-      })
-      this.newColumnName = ''
+    createColumn (event) {
+      if (event.target.value === '') {
+        // if user does not key in any word, blur the input
+        return event.target.blur()
+      } else {
+        this.$store.commit('CREATE_COLUMN', {
+          name: event.target.value
+        })
+        event.target.value = ''
+      }
     }
   }
 }
