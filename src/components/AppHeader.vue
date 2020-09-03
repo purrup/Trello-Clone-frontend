@@ -3,8 +3,8 @@
     <input
     type="text"
     v-model="boardName"
+    @keyup.enter="$event.target.blur()"
     class="w-auto bg-blue-500 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl">
-    <!-- <app-button /> -->
   </div>
 </template>
 
@@ -12,6 +12,11 @@
 import { mapState } from 'vuex'
 
 export default {
+  methods: {
+    test (e) {
+      console.log(e.target)
+    }
+  },
   computed: {
     ...mapState(['board']),
     boardName: {
