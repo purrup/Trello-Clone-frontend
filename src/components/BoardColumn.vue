@@ -1,5 +1,5 @@
 <template>
-    <div class="column cursor-pointer">
+    <div class="column">
       <div
       class="flex justify-between items-center mb-2 font-bold"
       @mouseover="showRemoveIcon = true"
@@ -16,17 +16,16 @@
         <draggable
           v-model="columnTasks"
           group="tasks-group"
-          :empty-insert-threshold="200"
-          v-bind="dragOptions">
-          <transition-group>
+          v-bind="dragOptions"
+          @start="drag = true"
+          @end="drag = false">
+          <transition-group type="transition">
             <ColumnTask
                   v-for="(task, $taskIndex) of column.tasks"
                   :key="task.id"
                   :task="task"
                   :taskIndex="$taskIndex"
-                  :column="column"
-                  :columnIndex="columnIndex"
-                  :board="board" />
+                  :columnIndex="columnIndex" />
           </transition-group>
         </draggable>
 
@@ -60,10 +59,6 @@ export default {
     columnIndex: {
       type: Number,
       required: true
-    },
-    board: {
-      type: Object,
-      required: true
     }
   },
   computed: {
@@ -78,7 +73,12 @@ export default {
     },
     dragOptions () {
       return {
-        animation: 200
+        animation: 500,
+        emptyInsertThreshold: 100,
+        scroll: true,
+        scrollSensitivity: 500
+        // forceFallback: true
+        // fallbacTolerance: 1
       }
     }
   },
@@ -105,7 +105,7 @@ export default {
 
 <style lang="css">
 .column {
-  @apply bg-gray-400 p-2 mr-4 text-left shadow rounded;
+  @apply cursor-pointer bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
 }
 </style>

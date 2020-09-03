@@ -88,7 +88,7 @@ export default {
 }
 
 .board {
-  @apply p-4 h-screen overflow-auto;
+  @apply p-4 h-screen overflow-x-auto;
 }
 
 .task-bg {
