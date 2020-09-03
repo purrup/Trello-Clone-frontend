@@ -14,12 +14,11 @@
       </div>
       <div>
         <draggable
+          class="columnTask overflow-y-auto"
           v-model="columnTasks"
           group="tasks-group"
-          v-bind="dragOptions"
-          @start="drag = true"
-          @end="drag = false">
-          <transition-group type="transition">
+          v-bind="dragOptions">
+          <transition-group>
             <ColumnTask
                   v-for="(task, $taskIndex) of column.tasks"
                   :key="task.id"
@@ -73,12 +72,9 @@ export default {
     },
     dragOptions () {
       return {
-        animation: 500,
+        animation: 200,
         emptyInsertThreshold: 100,
-        scroll: true,
-        scrollSensitivity: 500
-        // forceFallback: true
-        // fallbacTolerance: 1
+        scrollSensitivity: 10000
       }
     }
   },
@@ -107,5 +103,8 @@ export default {
 .column {
   @apply cursor-pointer bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
+}
+.columnTask {
+  max-height: 80vh;
 }
 </style>

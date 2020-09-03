@@ -12,11 +12,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  methods: {
-    test (e) {
-      console.log(e.target)
-    }
-  },
   computed: {
     ...mapState(['board']),
     boardName: {
@@ -32,6 +27,4 @@ export default {
 </script>
 
 <style scoped>
-.header {
-}
 </style>

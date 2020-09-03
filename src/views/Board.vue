@@ -1,5 +1,5 @@
 <template>
-  <div class="board bg-blue-500">
+  <div class="board bg-blue-500 h-screen overflow-y-hidden">
     <AppHeader></AppHeader>
     <div class="flex flex-row items-start">
       <draggable
@@ -88,7 +88,7 @@ export default {
 }
 
 .board {
-  @apply p-4 h-screen overflow-x-auto;
+  @apply p-4 overflow-x-auto;
 }
 
 .task-bg {
