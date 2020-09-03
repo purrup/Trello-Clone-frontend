@@ -1,5 +1,5 @@
 <template>
-  <div class="task cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-500"
+  <div class="task cursor-pointer transition duration-300 ease-in-out bg-white hover:bg-gray-300"
         @click="goToTask(task)"
         @mouseover="showRemoveIcon = true"
         @mouseout="showRemoveIcon = false">
@@ -34,10 +34,10 @@ export default {
       type: Number,
       required: true
     },
-    board: {
-      type: Object,
-      required: true
-    },
+    // board: {
+    //   type: Object,
+    //   required: true
+    // },
     task: {
       type: Object,
       required: true
@@ -68,11 +68,5 @@ export default {
 <style lang="css">
 .task {
   @apply flex items-center flex-wrap shadow mb-2 py-2 px-2 rounded text-gray-800 no-underline;
-}
-/* .task:hover {
-  background-color: #EDF2F7;
-} */
-.removeIcon {
-  transition: all 5s ease-in-out;
 }
 </style>

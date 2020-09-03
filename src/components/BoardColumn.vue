@@ -9,13 +9,14 @@
         v-show="showRemoveIcon"
           :icon="['far', 'trash-alt']"
           @click.stop="removeColumn"
-          class="removeIcon ">
+          class="removeIcon hover:text-red-500 transition duration-500 ease-in-out">
         </AppIcon>
       </div>
       <div>
         <draggable
           v-model="columnTasks"
-         :group="{ name: 'tasks-group' }"
+          group="tasks-group"
+          :empty-insert-threshold="200"
           v-bind="dragOptions">
           <transition-group>
             <ColumnTask

@@ -19,7 +19,6 @@ export default {
         return this.board.name
       },
       set (value) {
-        console.log('change board name')
         this.$store.commit('UPDATE_BOARD_NAME', value)
       }
     }
