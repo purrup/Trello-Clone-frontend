@@ -2,7 +2,7 @@
 
 Clone the core features of [Trello](https://trello.com/)
 
-## [Demo](http://g.recordit.co/JrLpsUB1Zh.gif)
+## ![Demo](http://g.recordit.co/JrLpsUB1Zh.gif)
 
 ## Live Demos
 
