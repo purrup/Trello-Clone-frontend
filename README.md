@@ -2,9 +2,9 @@
 
 Clone the core features of [Trello](https://trello.com/)
 
-## [Demo](https://recordit.co/JrLpsUB1Zh)
+## [Demo](http://g.recordit.co/JrLpsUB1Zh.gif)
 
-## [Live Demos]
+## Live Demos
 
 https://trello-clone-vin.netlify.app/
 
