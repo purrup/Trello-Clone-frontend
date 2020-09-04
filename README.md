@@ -36,7 +36,7 @@ npm run lint
 * [Vue Router](https://router.vuejs.org/zh/) - The official router for Vue.js.
 * [vuedraggable](https://sortablejs.github.io/Vue.Draggable/) - Vue component allowing drag-and-drop and synchronization with view model array.
 * [Tailwind CSS](https://tailwindcss.com/) - CSS framework
-* [Font Awesome](https://fontawesome.com/) - icons library
+* [vue-fontawesome](https://www.npmjs.com/package/@fortawesome/vue-fontawesome#vue-fontawesome) - icons library
 
 ## Authors
 
