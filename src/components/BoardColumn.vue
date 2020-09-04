@@ -17,7 +17,8 @@
           class="columnTask overflow-y-auto"
           v-model="columnTasks"
           group="tasks-group"
-          v-bind="dragOptions">
+          v-bind="dragOptions"
+          ghost-class="ghost-task">
           <transition-group>
             <ColumnTask
                   v-for="(task, $taskIndex) of column.tasks"
@@ -106,5 +107,8 @@ export default {
 }
 .columnTask {
   max-height: 80vh;
+}
+.ghost-task {
+  @apply border opacity-50 border-blue-500 bg-gray-200;
 }
 </style>

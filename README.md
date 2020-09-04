@@ -1,6 +1,15 @@
 # Trello Clone
 
-## Project setup
+Clone the core features of [Trello](https://trello.com/)
+
+## [Demo](https://recordit.co/JrLpsUB1Zh)
+
+## [Live Demos]
+
+https://trello-clone-vin.netlify.app/
+
+### Installing
+
 ```
 npm install
 ```
@@ -15,15 +24,20 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
 ### Lints and fixes files
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Built With
+
+* [Vue.js](https://vuejs.org/) - The front-end framework
+* [Vuex](https://vuex.vuejs.org/zh/guide/) - A state management pattern + library for Vue.js applications
+* [Vue Router](https://router.vuejs.org/zh/) - The official router for Vue.js.
+* [vuedraggable](https://sortablejs.github.io/Vue.Draggable/) - Vue component allowing drag-and-drop and synchronization with view model array.
+* [Tailwind CSS](https://tailwindcss.com/) - CSS framework
+* [Font Awesome](https://fontawesome.com/) - icons library
+
+## Authors
+
+* **Vin** - *Initial work* - [purrup](https://github.com/purrup)
