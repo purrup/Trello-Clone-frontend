@@ -4,22 +4,24 @@
     <div class="flex flex-row items-start">
       <draggable
         v-model="lists"
-        v-bind="dragOptions">
+        v-bind="dragOptions"
+        @end="updateListsOrder">
         <transition-group class="flex flex-row items-start">
           <List
             v-for="(list, $listIndex) of board.lists"
             :key="list._id"
             :list="list"
             :listIndex="$listIndex"
-            :board="board" />
+            :board="board"
+            />
         </transition-group>
       </draggable>
 
       <div class="list flex">
         <input type="text"
                class="p-2 mr-2 flex-grow bg-white border-none text-base"
-               placeholder="+ Add New Column"
-               @keyup.enter="createColumn">
+               placeholder="+ Add New List"
+               @keyup.enter="createList">
       </div>
     </div>
 
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import List from '@/components/List.vue'
 import draggable from 'vuedraggable'
 
@@ -44,13 +46,10 @@ export default {
   },
   data () {
     return {
-      backendBoard: {
-        _id: '6054a8c4753756779c0223ad'
-      }
     }
   },
   mounted () {
-    this.getBoard(this.backendBoard._id)
+    this.getBoard(this.$route.params.boardId)
   },
   computed: {
     ...mapState('board', {
@@ -64,7 +63,7 @@ export default {
         return this.board.lists
       },
       set (value) {
-        this.$store.commit('UPDATE_BOARD', value)
+        this.UPDATE_BOARD_LIST(value)
       }
     },
     dragOptions () {
@@ -74,7 +73,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions('board', ['getBoard']),
+    ...mapActions('board', ['getBoard', 'updateBoard']),
+    ...mapActions('list', ['updateList']),
+    ...mapMutations('board', ['UPDATE_BOARD_LIST']),
     close () {
       return this.$router.push({ name: 'board' })
     },
@@ -88,6 +89,15 @@ export default {
         })
         event.target.value = ''
       }
+    },
+    async updateListsOrder () {
+      const lists = this.lists.map((list, index) => {
+        list.order = index
+        return list
+      })
+      await lists.forEach(list => {
+        this.updateList({ id: list._id, data: list })
+      })
     }
   }
 }

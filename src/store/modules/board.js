@@ -105,16 +105,8 @@ const mutations = {
   UPDATE_BOARD_TITLE (state, value) {
     state.board.title = value
   },
-  UPDATE_BOARD (state, value) {
+  UPDATE_BOARD_LIST (state, value) {
     state.board.lists = value
-  },
-  CREATE_LIST (state, { title }) {
-    state.board.lists.push({
-      title
-    })
-  },
-  REMOVE_LIST (state, listIndex) {
-    state.board.lists.splice(listIndex, 1)
   },
   CREATE_CARD (state, { cards, title }) {
     cards.push({
@@ -145,7 +137,6 @@ const actions = {
   },
   async updateBoard ({ commit }, { id, data }) {
     try {
-      console.log('data:', data)
       const updatedBoard = await axios.put(`/boards/${id}`, {
         data
       })

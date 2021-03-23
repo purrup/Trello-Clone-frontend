@@ -10,12 +10,12 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/:boardId',
       name: 'board',
       component: Board,
       children: [
         {
-          path: 'card/:id',
+          path: 'cards/:id',
           name: 'card',
           component: Card
         }

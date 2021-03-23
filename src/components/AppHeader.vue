@@ -43,8 +43,8 @@ export default {
       }
     },
     // input blur後 dispatch updateBoard
-    updateBoardTitle () {
-      this.updateBoard({ id: this.board._id, data: this.board })
+    async updateBoardTitle () {
+      await this.updateBoard({ id: this.board._id, data: this.board })
     }
   }
 }
