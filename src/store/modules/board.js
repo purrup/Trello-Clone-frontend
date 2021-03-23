@@ -85,22 +85,33 @@ const state = {
 }
 
 const getters = {
+  getCard (state) {
+    return (id) => {
+      for (const list of state.board.lists) {
+        for (const card of list.cards) {
+          if (card._id === id) {
+            return card
+          }
+        }
+      }
+    }
+  }
 }
 
 const mutations = {
   SET_BOARD (state, data) {
     state.board = data
   },
-  CREATE_LIST (state, { title }) {
-    state.board.lists.push({
-      title
-    })
-  },
   UPDATE_BOARD_TITLE (state, value) {
     state.board.title = value
   },
   UPDATE_BOARD (state, value) {
     state.board.lists = value
+  },
+  CREATE_LIST (state, { title }) {
+    state.board.lists.push({
+      title
+    })
   },
   REMOVE_LIST (state, listIndex) {
     state.board.lists.splice(listIndex, 1)
@@ -110,6 +121,9 @@ const mutations = {
       title,
       description: ''
     })
+  },
+  UPDATE_CARD (state, { card, key, value }) {
+    card[key] = value
   },
   MOVE_CARD (state, { listIndex, value }) {
     state.board.lists[listIndex].card = value
@@ -125,6 +139,18 @@ const actions = {
     try {
       const { data } = await axios.get(`/boards/${id}`)
       commit('SET_BOARD', data[0])
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async updateBoard ({ commit }, { id, data }) {
+    try {
+      console.log('data:', data)
+      const updatedBoard = await axios.put(`/boards/${id}`, {
+        data
+      })
+      console.log('updatedBoard:', updatedBoard.data)
+      // commit('SET_BOARD', updatedBoard[0])
     } catch (error) {
       console.log(error)
     }

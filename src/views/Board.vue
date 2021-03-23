@@ -93,7 +93,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 
 .list {
   @apply bg-gray-400 p-2 mr-4 text-left shadow rounded;
