@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Board from './views/Board.vue'
-import Task from './views/Task.vue'
+import Card from './views/Card.vue'
 
 Vue.use(Router)
 
@@ -15,9 +15,9 @@ export default new Router({
       component: Board,
       children: [
         {
-          path: 'task/:id',
-          name: 'task',
-          component: Task
+          path: 'card/:id',
+          name: 'card',
+          component: Card
         }
       ]
     }

@@ -1,74 +1,74 @@
 <template>
-    <div class="column">
+    <div class="list">
       <div
       class="flex justify-between items-center mb-2 font-bold"
       @mouseover="showRemoveIcon = true"
       @mouseout="showRemoveIcon = false">
-        {{ column.name }}
+        {{ list.title }}
         <AppIcon
         v-show="showRemoveIcon"
           :icon="['far', 'trash-alt']"
-          @click.stop="removeColumn"
+          @click.stop="removeList"
           class="removeIcon hover:text-red-500 transition duration-500 ease-in-out">
         </AppIcon>
       </div>
       <div>
         <draggable
-          class="columnTask overflow-y-auto"
-          v-model="columnTasks"
-          group="tasks-group"
+          class="card overflow-y-auto"
+          v-model="cards"
+          group="cards-group"
           v-bind="dragOptions"
-          ghost-class="ghost-task">
+          ghost-class="ghost-card">
           <transition-group>
-            <ColumnTask
-                  v-for="(task, $taskIndex) of column.tasks"
-                  :key="task.id"
-                  :task="task"
-                  :taskIndex="$taskIndex"
-                  :columnIndex="columnIndex" />
+            <ListCard
+                  v-for="(card, $cardIndex) of list.cards"
+                  :key="card._id"
+                  :card="card"
+                  :cardIndex="$cardIndex"
+                  :listIndex="listIndex" />
           </transition-group>
         </draggable>
 
         <input type="text"
                 class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700"
                 placeholder="+ Add New Task"
-                @keyup.enter="createTask($event, column.tasks)">
+                @keyup.enter="createCard($event, list.cards)">
       </div>
     </div>
 </template>
 
 <script>
-import ColumnTask from '@/components/ColumnTask.vue'
+import ListCard from '@/components/ListCard.vue'
 import draggable from 'vuedraggable'
 
 export default {
   components: {
-    ColumnTask,
+    ListCard,
     draggable
+  },
+  props: {
+    list: {
+      type: Object,
+      required: true
+    },
+    listIndex: {
+      type: Number,
+      required: true
+    }
   },
   data () {
     return {
       showRemoveIcon: false
     }
   },
-  props: {
-    column: {
-      type: Object,
-      required: true
-    },
-    columnIndex: {
-      type: Number,
-      required: true
-    }
-  },
   computed: {
-    columnTasks: {
+    cards: {
       get () {
-        return this.column.tasks
+        return this.list.cards
       },
       set (value) {
-        const columnIndex = this.columnIndex
-        this.$store.commit('MOVE_TASK', { columnIndex, value })
+        const listIndex = this.listIndex
+        this.$store.commit('MOVE_CARD', { listIndex, value })
       }
     },
     dragOptions () {
@@ -80,35 +80,35 @@ export default {
     }
   },
   methods: {
-    createTask (event, tasks) {
+    createCard (event, cards) {
       if (event.target.value === '') {
         // if user does not key in any word, blur the input
         return event.target.blur()
       } else {
-        this.$store.commit('CREATE_TASK', {
-          tasks,
-          name: event.target.value
+        this.$store.commit('CREATE_CARD', {
+          cards,
+          title: event.target.value
         })
         event.target.value = ''
       }
     },
-    removeColumn () {
-      const columnIndex = this.columnIndex
-      this.$store.commit('REMOVE_COLUMN', columnIndex)
+    removeList () {
+      const listIndex = this.listIndex
+      this.$store.commit('REMOVE_LIST', listIndex)
     }
   }
 }
 </script>
 
 <style lang="css">
-.column {
+.list {
   @apply cursor-pointer bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
 }
-.columnTask {
+.card {
   max-height: 80vh;
 }
-.ghost-task {
+.ghost-card {
   @apply border opacity-50 border-blue-500 bg-gray-200;
 }
 </style>

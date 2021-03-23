@@ -2,7 +2,7 @@
   <div class="header h-12 flex justify-between items-center overflow-auto pb-2">
     <input
     type="text"
-    v-model="boardName"
+    v-model="boardTitle"
     @keyup.enter="blurOnSecondEnter"
     class="w-auto bg-blue-500 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl">
   </div>
@@ -18,13 +18,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(['board']),
-    boardName: {
+    ...mapState('board', {
+      board: state => state.board
+    }),
+    boardTitle: {
       get () {
-        return this.board.name
+        return this.board.title
       },
       set (value) {
-        this.$store.commit('UPDATE_BOARD_NAME', value)
+        this.$store.commit('UPDATE_BOARD_TITLE', value)
       }
     }
   },

@@ -3,19 +3,19 @@
     <AppHeader></AppHeader>
     <div class="flex flex-row items-start">
       <draggable
-        v-model="columns"
+        v-model="lists"
         v-bind="dragOptions">
         <transition-group class="flex flex-row items-start">
-          <BoardColumn
-            v-for="(column, $columnIndex) of board.columns"
-            :key="column.name"
-            :column="column"
-            :columnIndex="$columnIndex"
+          <List
+            v-for="(list, $listIndex) of board.lists"
+            :key="list._id"
+            :list="list"
+            :listIndex="$listIndex"
             :board="board" />
         </transition-group>
       </draggable>
 
-      <div class="column flex">
+      <div class="list flex">
         <input type="text"
                class="p-2 mr-2 flex-grow bg-white border-none text-base"
                placeholder="+ Add New Column"
@@ -24,8 +24,8 @@
     </div>
 
     <div
-      v-if="isTaskOpen"
-      class="task-bg w-screen h-screen absolute"
+      v-if="isCardOpen"
+      class="card-bg w-screen h-screen absolute"
       @click.self="close">
       <router-view />
     </div>
@@ -33,23 +33,35 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import BoardColumn from '@/components/BoardColumn.vue'
+import { mapState, mapActions } from 'vuex'
+import List from '@/components/List.vue'
 import draggable from 'vuedraggable'
 
 export default {
   components: {
-    BoardColumn,
+    List,
     draggable
   },
+  data () {
+    return {
+      backendBoard: {
+        _id: '6054a8c4753756779c0223ad'
+      }
+    }
+  },
+  mounted () {
+    this.getBoard(this.backendBoard._id)
+  },
   computed: {
-    ...mapState(['board']),
-    isTaskOpen () {
-      return this.$route.name === 'task'
+    ...mapState('board', {
+      board: state => state.board
+    }),
+    isCardOpen () {
+      return this.$route.name === 'card'
     },
-    columns: {
+    lists: {
       get () {
-        return this.board.columns
+        return this.board.lists
       },
       set (value) {
         this.$store.commit('UPDATE_BOARD', value)
@@ -62,16 +74,17 @@ export default {
     }
   },
   methods: {
+    ...mapActions('board', ['getBoard']),
     close () {
       return this.$router.push({ name: 'board' })
     },
-    createColumn (event) {
+    createList (event) {
       if (event.target.value === '') {
         // if user does not key in any word, blur the input
         return event.target.blur()
       } else {
-        this.$store.commit('CREATE_COLUMN', {
-          name: event.target.value
+        this.$store.commit('CREATE_LIST', {
+          title: event.target.value
         })
         event.target.value = ''
       }
@@ -82,7 +95,7 @@ export default {
 
 <style lang="css">
 
-.column {
+.list {
   @apply bg-gray-400 p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
 }
@@ -91,7 +104,7 @@ export default {
   @apply p-4 overflow-x-auto;
 }
 
-.task-bg {
+.card-bg {
   background: rgba(0,0,0,0.5);
   top: 0;
   right: 0;
