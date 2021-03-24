@@ -26,18 +26,18 @@
           @sort="updateCardsOrder">
           <transition-group>
             <ListCard
-                  v-for="(card, $cardIndex) of list.cards"
-                  :key="card._id"
+                  v-for="(card, index) of list.cards"
+                  :key="index"
                   :card="card"
-                  :cardIndex="$cardIndex"
-                  :listId="listId" />
+                  :cardIndex="index"
+                  :listId="list._id" />
           </transition-group>
         </draggable>
 
         <input type="text"
-                class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700"
+                class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700 focus:bg-white focus:text-black focus:font-medium"
                 placeholder="+ Add New Card"
-                @keyup.enter="createCard($event, list.cards)">
+                @keyup.enter="addCard($event, list.cards)">
       </div>
     </div>
 </template>
@@ -45,7 +45,7 @@
 <script>
 import ListCard from '@/components/ListCard.vue'
 import draggable from 'vuedraggable'
-import { mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -56,10 +56,6 @@ export default {
     list: {
       type: Object,
       required: true
-    },
-    listId: {
-      type: String,
-      required: true
     }
   },
   data () {
@@ -68,6 +64,12 @@ export default {
     }
   },
   computed: {
+    ...mapState('user', {
+      user: state => state.user
+    }),
+    ...mapState('board', {
+      board: state => state.board
+    }),
     listTitle: {
       get () {
         return this.list.title
@@ -81,7 +83,7 @@ export default {
         return this.list.cards
       },
       set (data) {
-        this.MOVE_CARD({ listId: this.listId, data })
+        this.MOVE_CARD({ listId: this.list._id, data })
       }
     },
     dragOptions () {
@@ -94,17 +96,21 @@ export default {
   },
   methods: {
     ...mapActions('list', ['updateList', 'deleteList']),
-    ...mapActions('card', ['updateCard']),
+    ...mapActions('card', ['updateCard', 'createCard']),
     ...mapMutations('list', ['UPDATE_LIST_TITLE', 'MOVE_CARD']),
-    createCard (event, cards) {
+    addCard (event, cards) {
       if (event.target.value === '') {
         // if user does not key in any word, blur the input
         return event.target.blur()
       } else {
-        this.$store.commit('CREATE_CARD', {
-          cards,
-          title: event.target.value
-        })
+        const data = {
+          title: event.target.value,
+          listId: this.list._id,
+          boardId: this.board._id,
+          userCreated: this.user._id,
+          order: cards.length
+        }
+        this.createCard({ data })
         event.target.value = ''
       }
     },
@@ -123,7 +129,7 @@ export default {
     updateCardsOrder () {
       const cards = this.cards.map((card, index) => {
         card.order = index
-        card.listId = this.listId
+        card.listId = this.list._id
         return card
       })
       cards.forEach(card => {

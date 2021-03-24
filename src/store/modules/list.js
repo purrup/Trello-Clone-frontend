@@ -28,6 +28,13 @@ const mutations = {
   DELETE_LIST (state, { id }) {
     state.list = state.list.filter(list => list._id !== id)
   },
+  ADD_CARD (state, { data }) {
+    state.list.forEach(list => {
+      if (list._id === data.listId) {
+        list.cards.push(data)
+      }
+    })
+  },
   MOVE_CARD (state, { listId, data }) {
     state.list.forEach(list => {
       if (list._id === listId) {

@@ -8,10 +8,9 @@
         @end="updateListsOrder">
         <transition-group class="flex flex-row items-start">
           <List
-            v-for="list of lists"
-            :key="list._id"
+            v-for="(list, index) of lists"
+            :key="index"
             :list="list"
-            :listId="list._id"
             :board="board"
             />
         </transition-group>
