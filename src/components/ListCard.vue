@@ -26,8 +26,8 @@
 
 export default {
   props: {
-    listIndex: {
-      type: Number,
+    listId: {
+      type: String,
       required: true
     },
     card: {
@@ -49,9 +49,9 @@ export default {
       return this.$router.push({ name: 'card', params: { id: card.id } })
     },
     removeCard () {
-      const listIndex = this.listIndex
-      const cardIndex = this.cardIndex
-      this.$store.commit('REMOVE_CARD', { listIndex, cardIndex })
+      // const listIndex = this.listIndex
+      // const cardIndex = this.cardIndex
+      // this.$store.commit('REMOVE_CARD', { listIndex, cardIndex })
     }
   }
 }

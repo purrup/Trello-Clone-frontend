@@ -107,33 +107,31 @@ const mutations = {
   },
   UPDATE_BOARD_LIST (state, value) {
     state.board.lists = value
-  },
-  CREATE_BOARD_LIST (state, { data }) {
-    state.board.lists.push(data)
-  },
-  CREATE_CARD (state, { cards, title }) {
-    cards.push({
-      title,
-      description: ''
-    })
-  },
-  UPDATE_CARD (state, { card, key, value }) {
-    card[key] = value
-  },
-  MOVE_CARD (state, { listIndex, value }) {
-    state.board.lists[listIndex].card = value
-  },
-  REMOVE_CARD (state, { listIndex, cardIndex }) {
-    const cardList = state.board.lists[listIndex].cards
-    cardList.splice(cardIndex, 1)
   }
+  // CREATE_CARD (state, { cards, title }) {
+  //   cards.push({
+  //     title,
+  //     description: ''
+  //   })
+  // },
+  // UPDATE_CARD (state, { card, key, value }) {
+  //   card[key] = value
+  // },
+  // MOVE_CARD (state, { listIndex, value }) {
+  //   state.board.lists[listIndex].card = value
+  // },
+  // REMOVE_CARD (state, { listIndex, cardIndex }) {
+  //   const cardList = state.board.lists[listIndex].cards
+  //   cardList.splice(cardIndex, 1)
+  // }
 }
 
 const actions = {
   async getBoard ({ commit }, id) {
     try {
       const { data } = await axios.get(`/boards/${id}`)
-      commit('SET_BOARD', data[0])
+      commit('SET_BOARD', data)
+      commit('list/SET_LIST', data.lists, { root: true })
     } catch (error) {
       console.log(error)
     }

@@ -8,10 +8,10 @@
         @end="updateListsOrder">
         <transition-group class="flex flex-row items-start">
           <List
-            v-for="(list, $listIndex) of board.lists"
+            v-for="list of lists"
             :key="list._id"
             :list="list"
-            :listIndex="$listIndex"
+            :listId="list._id"
             :board="board"
             />
         </transition-group>
@@ -55,6 +55,9 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
+    ...mapState('list', {
+      list: state => state.list
+    }),
     ...mapState('user', {
       user: state => state.user
     }),
@@ -63,10 +66,10 @@ export default {
     },
     lists: {
       get () {
-        return this.board.lists
+        return this.list
       },
-      set (value) {
-        this.UPDATE_BOARD_LIST(value)
+      set (data) {
+        this.MOVE_LIST(data)
       }
     },
     dragOptions () {
@@ -78,7 +81,7 @@ export default {
   methods: {
     ...mapActions('board', ['getBoard', 'updateBoard']),
     ...mapActions('list', ['updateList']),
-    ...mapMutations('board', ['UPDATE_BOARD_LIST']),
+    ...mapMutations('list', ['MOVE_LIST']),
     close () {
       return this.$router.push({ name: 'board' })
     },

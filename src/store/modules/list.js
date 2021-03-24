@@ -9,8 +9,31 @@ const getters = {
 }
 
 const mutations = {
-  REMOVE_LIST (state, listIndex) {
-    state.board.lists.splice(listIndex, 1)
+  SET_LIST (state, data) {
+    state.list = data
+  },
+  MOVE_LIST (state, data) {
+    state.list = data
+  },
+  UPDATE_LIST_TITLE (state, { id, data }) {
+    state.list.forEach(list => {
+      if (list._id === id) {
+        list.title = data
+      }
+    })
+  },
+  CREATE_LIST (state, { data }) {
+    state.list.push(data)
+  },
+  DELETE_LIST (state, { id }) {
+    state.list = state.list.filter(list => list._id !== id)
+  },
+  MOVE_CARD (state, { listId, data }) {
+    state.list.forEach(list => {
+      if (list._id === listId) {
+        list.cards = data
+      }
+    })
   }
 }
 
@@ -30,13 +53,14 @@ const actions = {
       // console.log('data:', data)
       const list = await axios.post(`/lists`, { data })
       console.log('created list:', list.data)
-      commit('board/CREATE_BOARD_LIST', { data: list.data }, { root: true })
+      commit('CREATE_LIST', { data: list.data })
     } catch (error) {
       console.log(error)
     }
   },
   async deleteList ({ commit }, { id }) {
     try {
+      commit('DELETE_LIST', { id })
       await axios.delete(`/lists/${id}`)
       // console.log('deleted list:', response)
     } catch (error) {
