@@ -40,6 +40,7 @@
 <script>
 import ListCard from '@/components/ListCard.vue'
 import draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -80,6 +81,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('list', ['deleteList']),
     createCard (event, cards) {
       if (event.target.value === '') {
         // if user does not key in any word, blur the input
@@ -93,8 +95,7 @@ export default {
       }
     },
     removeList () {
-      const listIndex = this.listIndex
-      this.$store.commit('REMOVE_LIST', listIndex)
+      this.deleteList({ id: this.list._id })
     }
   }
 }

@@ -9,11 +9,6 @@ const getters = {
 }
 
 const mutations = {
-  CREATE_LIST (state, { title }) {
-    state.board.lists.push({
-      title
-    })
-  },
   REMOVE_LIST (state, listIndex) {
     state.board.lists.splice(listIndex, 1)
   }
@@ -26,6 +21,24 @@ const actions = {
         data
       })
       console.log('updatedList:', updatedList.data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async createList ({ commit }, { data }) {
+    try {
+      // console.log('data:', data)
+      const list = await axios.post(`/lists`, { data })
+      console.log('created list:', list.data)
+      commit('board/CREATE_BOARD_LIST', { data: list.data }, { root: true })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async deleteList ({ commit }, { id }) {
+    try {
+      await axios.delete(`/lists/${id}`)
+      // console.log('deleted list:', response)
     } catch (error) {
       console.log(error)
     }

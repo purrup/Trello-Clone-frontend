@@ -55,6 +55,9 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
+    ...mapState('user', {
+      user: state => state.user
+    }),
     isCardOpen () {
       return this.$route.name === 'card'
     },
@@ -84,11 +87,15 @@ export default {
         // if user does not key in any word, blur the input
         return event.target.blur()
       } else {
-        this.$store.commit('CREATE_LIST', {
-          title: event.target.value
-        })
-        event.target.value = ''
+        const data = {
+          'title': event.target.value,
+          'boardId': this.board._id,
+          'userCreated': this.user._id,
+          'order': this.lists.length // 預設放在lists的最後一個
+        }
+        this.$store.dispatch('list/createList', { data })
       }
+      event.target.value = ''
     },
     async updateListsOrder () {
       const lists = this.lists.map((list, index) => {

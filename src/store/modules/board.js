@@ -108,6 +108,9 @@ const mutations = {
   UPDATE_BOARD_LIST (state, value) {
     state.board.lists = value
   },
+  CREATE_BOARD_LIST (state, { data }) {
+    state.board.lists.push(data)
+  },
   CREATE_CARD (state, { cards, title }) {
     cards.push({
       title,
