@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   props: {
@@ -45,10 +46,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions('card', ['deleteCard']),
     goToCard (card) {
       return this.$router.push({ name: 'card', params: { id: card.id } })
     },
     removeCard () {
+      this.deleteCard({ id: this.card._id })
       // const listIndex = this.listIndex
       // const cardIndex = this.cardIndex
       // this.$store.commit('REMOVE_CARD', { listIndex, cardIndex })

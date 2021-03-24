@@ -41,6 +41,12 @@ const mutations = {
         list.cards = data
       }
     })
+  },
+  DELETE_CARD (state, { id }) {
+    state.list.forEach((list, index) => {
+      const cards = list.cards.filter(card => card._id !== id)
+      state.list[index].cards = cards
+    })
   }
 }
 

@@ -32,6 +32,14 @@ const actions = {
     } catch (error) {
       console.log(error)
     }
+  },
+  async deleteCard ({ commit }, { id }) {
+    try {
+      await axios.delete(`/cards/${id}`)
+      commit('list/DELETE_CARD', { id }, { root: true })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
