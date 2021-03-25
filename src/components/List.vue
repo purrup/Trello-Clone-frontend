@@ -29,8 +29,7 @@
                   v-for="(card, index) of list.cards"
                   :key="index"
                   :card="card"
-                  :cardIndex="index"
-                  :listId="list._id" />
+                  />
           </transition-group>
         </draggable>
 

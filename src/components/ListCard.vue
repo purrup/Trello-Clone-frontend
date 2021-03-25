@@ -4,8 +4,9 @@
         @mouseover="showRemoveIcon = true"
         @mouseout="showRemoveIcon = false">
     <div class="head-wrapper w-full flex flex-row justify-between">
-      <span class="w-auto flex-shrink-0 font-bold">
-      {{ card.title }}
+      <span
+      class="w-auto flex-shrink-0 font-bold">
+      {{ cardTitle }}
       </span>
       <AppIcon
         v-show="showRemoveIcon"
@@ -16,33 +17,66 @@
     </div>
     <AppIcon
       icon="bars"
-      v-if="card.description"
+      v-if="cardDescription"
       class="mt-2">
     </AppIcon>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   props: {
-    listId: {
-      type: String,
-      required: true
-    },
     card: {
       type: Object,
       required: true
-    },
-    cardIndex: {
-      type: Number,
-      required: true
     }
+    // listId: {
+    //   type: String,
+    //   required: true
+    // },
+    // cardIndex: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   data () {
     return {
-      showRemoveIcon: false
+      showRemoveIcon: false,
+      cardLocal: { ...this.card }
+    }
+  },
+  computed: {
+    ...mapState('card', {
+      storeCard: state => state.card
+    }),
+    cardTitle: {
+      get () {
+        if (this.cardLocal._id === this.storeCard._id) {
+          return this.storeCard.title // 此時會觸發watcher cardTitle
+        } else {
+          return this.cardLocal.title
+        }
+      }
+    },
+    cardDescription: {
+      get () {
+        if (this.cardLocal._id === this.storeCard._id) {
+          return this.storeCard.description
+        } else {
+          return this.cardLocal.description
+        }
+      }
+    }
+  },
+  watch: {
+    cardTitle (newValue) {
+      // 當cardTitle有變動時，一定是Card頁面在編輯card title時，此時同步local card的值
+      this.cardLocal.title = newValue
+    },
+    cardDescription (newValue) {
+      this.cardLocal.description = newValue
     }
   },
   methods: {

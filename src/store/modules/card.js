@@ -10,7 +10,7 @@ const getters = {
 
 const mutations = {
   SET_CARD (state, { data }) {
-    state.card = data
+    state.card = { ...state.card, ...data }
   }
 }
 
@@ -40,6 +40,7 @@ const actions = {
         data
       })
       console.log('updatedCard:', updatedCard.data)
+      commit('SET_CARD', { data: updatedCard })
     } catch (error) {
       console.log(error)
     }
