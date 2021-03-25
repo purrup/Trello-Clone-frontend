@@ -16,15 +16,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
+  created () {
+    this.getCard({ id: this.$route.params.id })
+  },
   computed: {
-    ...mapGetters(['getCard']),
-    card () {
-      return this.getCard(this.$route.params.id)
-    }
+    ...mapState('card', {
+      card: state => state.card
+    })
   },
   methods: {
+    ...mapActions('card', ['getCard']),
     updateCardProperty (e, key) {
       this.$store.commit('UPDATE_CARD', {
         card: this.card,

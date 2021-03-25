@@ -48,7 +48,7 @@ export default {
   methods: {
     ...mapActions('card', ['deleteCard']),
     goToCard (card) {
-      return this.$router.push({ name: 'card', params: { id: card.id } })
+      return this.$router.push({ name: 'card', params: { id: card._id } })
     },
     removeCard () {
       this.deleteCard({ id: this.card._id })

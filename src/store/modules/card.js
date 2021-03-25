@@ -9,9 +9,20 @@ const getters = {
 }
 
 const mutations = {
+  SET_CARD (state, { data }) {
+    state.card = data
+  }
 }
 
 const actions = {
+  async getCard ({ commit }, { id }) {
+    try {
+      const { data } = await axios.get(`/cards/${id}`)
+      commit('SET_CARD', { data })
+    } catch (error) {
+      console.log(error)
+    }
+  },
   async createCard ({ commit }, { data }) {
     try {
       const createdCard = await axios.post(`/cards`, {
