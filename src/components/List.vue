@@ -26,8 +26,8 @@
           @sort="updateCardsOrder">
           <transition-group>
             <ListCard
-                  v-for="(card, index) of list.cards"
-                  :key="index"
+                  v-for="card of cards"
+                  :key="card._id"
                   :card="card"
                   />
           </transition-group>
@@ -36,7 +36,7 @@
         <input type="text"
                 class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700 focus:bg-white focus:text-black focus:font-medium"
                 placeholder="+ Add New Card"
-                @keyup.enter="addCard($event, list.cards)">
+                @keyup.enter="addCard($event, cards)">
       </div>
     </div>
 </template>
@@ -69,6 +69,9 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
+    // ...mapState('list', {
+    //   storeList: state => state.list
+    // }),
     listTitle: {
       get () {
         return this.list.title
@@ -97,7 +100,7 @@ export default {
     ...mapActions('list', ['updateList', 'deleteList']),
     ...mapActions('card', ['updateCard', 'createCard']),
     ...mapMutations('list', ['UPDATE_LIST_TITLE', 'MOVE_CARD']),
-    addCard (event, cards) {
+    async addCard (event, cards) {
       if (event.target.value === '') {
         // if user does not key in any word, blur the input
         return event.target.blur()
@@ -107,9 +110,9 @@ export default {
           listId: this.list._id,
           boardId: this.board._id,
           userCreated: this.user._id,
-          order: cards.length
+          order: cards.length ? cards.length : 0
         }
-        this.createCard({ data })
+        await this.createCard({ data })
         event.target.value = ''
       }
     },

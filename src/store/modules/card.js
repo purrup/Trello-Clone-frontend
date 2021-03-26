@@ -1,8 +1,7 @@
 import axios from '../../utils/axios.js'
 
 const state = {
-  card: [{
-  }]
+  card: {}
 }
 
 const getters = {
@@ -28,7 +27,7 @@ const actions = {
       const createdCard = await axios.post(`/cards`, {
         data
       })
-      commit('list/ADD_CARD', { data }, { root: true })
+      commit('list/ADD_CARD', { data: createdCard.data }, { root: true })
       console.log('createdCard:', createdCard.data)
     } catch (error) {
       console.log(error)

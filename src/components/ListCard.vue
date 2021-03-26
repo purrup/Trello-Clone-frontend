@@ -32,14 +32,6 @@ export default {
       type: Object,
       required: true
     }
-    // listId: {
-    //   type: String,
-    //   required: true
-    // },
-    // cardIndex: {
-    //   type: Number,
-    //   required: true
-    // }
   },
   data () {
     return {
@@ -53,7 +45,7 @@ export default {
     }),
     cardTitle: {
       get () {
-        if (this.cardLocal._id === this.storeCard._id) {
+        if (this.storeCard._id && this.cardLocal._id === this.storeCard._id) {
           return this.storeCard.title // 此時會觸發watcher cardTitle
         } else {
           return this.cardLocal.title
@@ -62,7 +54,7 @@ export default {
     },
     cardDescription: {
       get () {
-        if (this.cardLocal._id === this.storeCard._id) {
+        if (this.storeCard._id && this.cardLocal._id === this.storeCard._id) {
           return this.storeCard.description
         } else {
           return this.cardLocal.description
@@ -86,9 +78,6 @@ export default {
     },
     removeCard () {
       this.deleteCard({ id: this.card._id })
-      // const listIndex = this.listIndex
-      // const cardIndex = this.cardIndex
-      // this.$store.commit('REMOVE_CARD', { listIndex, cardIndex })
     }
   }
 }
