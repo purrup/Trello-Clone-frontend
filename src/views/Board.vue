@@ -7,7 +7,7 @@
         v-bind="dragOptions"
         @end="updateListsOrder">
         <transition-group class="flex flex-row items-start">
-          <List
+          <BoardList
             v-for="(list, index) of lists"
             :key="index"
             :list="list"
@@ -35,12 +35,12 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import List from '@/components/List.vue'
+import BoardList from '@/components/BoardList.vue'
 import draggable from 'vuedraggable'
 
 export default {
   components: {
-    List,
+    BoardList,
     draggable
   },
   data () {
