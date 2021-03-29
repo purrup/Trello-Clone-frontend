@@ -5,7 +5,7 @@
     v-model="boardTitle"
     @keyup.enter="blurOnSecondEnter"
     @blur="updateBoardTitle"
-    class="w-auto bg-blue-500 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl">
+    class="bg-secondary-100 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl rounded-sm">
   </div>
 </template>
 

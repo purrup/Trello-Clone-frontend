@@ -60,13 +60,6 @@ export default {
       })
       event.target.value = ''
     }
-    // updateCardProperty (e, key) {
-    //   this.$store.commit('UPDATE_CARD', {
-    //     card: this.card,
-    //     key,
-    //     value: e.target.value
-    //   })
-    // }
   }
 }
 </script>

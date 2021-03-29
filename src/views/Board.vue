@@ -1,5 +1,5 @@
 <template>
-  <div class="board bg-blue-500 h-screen overflow-y-hidden">
+  <div class="board bg-primary h-screen overflow-y-hidden">
     <AppHeader></AppHeader>
     <div class="flex flex-row items-start">
       <draggable
