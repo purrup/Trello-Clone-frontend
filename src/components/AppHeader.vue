@@ -1,11 +1,12 @@
 <template>
   <div class="header h-auto flex justify-between items-center overflow-auto pb-2">
     <span
-    class="h-0 whitespace-pre overflow-hidden m-0 p-0 absolute font-bold text-2xl"
+    class="h-0 px-4 whitespace-pre overflow-hidden absolute font-bold text-2xl"
     ref="hideSpan">{{ boardTitle }}</span>
     <input
     type="text"
     v-model="boardTitle"
+    ref="input"
     @keyup.enter="blurOnSecondEnter"
     @blur="updateBoardTitle"
     class="py-1 px-4 bg-secondary-100 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl rounded-md"
@@ -20,11 +21,10 @@ export default {
   data () {
     return {
       enterTime: 0,
-      inputWidth: '0'
+      inputWidth: 0
     }
   },
   updated () {
-    // console.log(this.$refs.hideSpan.textContent)
     this.resizeWidth()
   },
   computed: {
@@ -62,7 +62,7 @@ export default {
       await this.updateBoard({ id: this.board._id, data: this.board })
     },
     resizeWidth () {
-      this.inputWidth = this.$refs.hideSpan.offsetWidth + 35
+      this.inputWidth = this.$refs.hideSpan.offsetWidth // offsetWidth是「元素本身」的寬度/高度，並完整了包含了邊界、捲軸及padding，所以包含了span px-4的寬度
     }
   }
 }
