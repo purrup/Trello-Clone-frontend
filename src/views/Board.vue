@@ -1,6 +1,6 @@
 <template>
   <div class="board bg-primary h-screen overflow-y-hidden">
-    <AppHeader></AppHeader>
+    <BoardHeader/>
     <div class="flex flex-row items-start">
       <draggable
         v-model="lists"
@@ -36,12 +36,14 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
 import BoardList from '@/components/BoardList.vue'
+import BoardHeader from '@/components/BoardHeader.vue'
 import draggable from 'vuedraggable'
 
 export default {
   components: {
     BoardList,
-    draggable
+    draggable,
+    BoardHeader
   },
   data () {
     return {
