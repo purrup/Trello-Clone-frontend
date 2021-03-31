@@ -7,8 +7,8 @@
         <AutoTextarea
           v-model="listTitle"
           @keydown.enter.native.prevent
-          @keyup.enter.native="updateListTitle"
-          @blur.native="updateListTitle"
+          @keyup.enter.native="updateListTitle($event.target.value), $event.target.blur()"
+          @blurFromTextarea="updateListTitle"
           class="w-10/12"
         />
         <AppIcon
@@ -18,7 +18,7 @@
           class="w-2/12 hover:text-red-500 transition duration-500 ease-in-out ">
         </AppIcon>
       </div>
-      <div class="">
+      <div>
         <draggable
           class="card overflow-y-auto"
           v-model="cards"
@@ -73,9 +73,6 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
-    // ...mapState('list', {
-    //   storeList: state => state.list
-    // }),
     listTitle: {
       get () {
         return this.list.title
@@ -120,14 +117,13 @@ export default {
         event.target.value = ''
       }
     },
-    async updateListTitle (e) {
+    async updateListTitle (value) {
       await this.updateList({
         id: this.list._id,
         data: {
-          title: e.target.value
+          title: value
         }
       })
-      e.target.blur()
     },
     async removeList () {
       await this.deleteList({ id: this.list._id })
@@ -150,10 +146,6 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.list {
-  @apply cursor-pointer bg-gray-400 p-2 mr-4 text-left shadow rounded;
-  min-width: 350px;
-}
 .card {
   max-height: 80vh;
 }

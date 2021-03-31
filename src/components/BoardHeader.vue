@@ -1,7 +1,7 @@
 <template>
   <div class="header h-auto flex justify-between items-center overflow-auto pb-2">
     <span
-    class="h-0 px-4 whitespace-pre overflow-hidden absolute font-bold text-2xl"
+    class="h-0 px-4 whitespace-pre overflow-hidden absolute font-bold text-xl"
     ref="hideSpan">{{ boardTitle }}</span>
     <input
     type="text"
@@ -9,7 +9,7 @@
     ref="input"
     @keyup.enter="blurOnSecondEnter"
     @blur="updateBoardTitle"
-    class="py-1 px-4 bg-secondary-100 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl rounded-md"
+    class="py-1 px-4 bg-secondary-100 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-xl rounded-md"
     :style="autoWidth">
   </div>
 </template>

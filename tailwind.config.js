@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#1F79BF',
+        primary: '#0079BF',
         secondary: {
           100: '#52A4D5',
           200: '#66A4C8',
@@ -17,6 +17,9 @@ module.exports = {
           iconHover: '#3688B9',
           light: '#4e95bf',
           DEFAULT: '#0067A3'
+        },
+        list: {
+          gray: '#EBECF0'
         }
       }
     }
