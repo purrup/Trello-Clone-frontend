@@ -1,22 +1,24 @@
 <template>
     <div class="list">
       <div
-      class="flex justify-between items-center mb-2 font-bold h-auto break-words"
-      @mouseover="showRemoveIcon = true"
-      @mouseout="showRemoveIcon = false">
-        <input
-        type="text"
-        v-model="listTitle"
-        @keyup.enter="updateListTitle"
-        class="w-4/5 bg-gray-400 focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-xl break-words">
+        class="flex justify-between items-center mb-2 font-bold list-header"
+        @mouseover="showRemoveIcon = true"
+        @mouseout="showRemoveIcon = false">
+        <AutoTextarea
+          v-model="listTitle"
+          @keydown.enter.native.prevent
+          @keyup.enter.native="updateListTitle"
+          @blur.native="updateListTitle"
+          class="w-10/12"
+        />
         <AppIcon
         v-show="showRemoveIcon"
           :icon="['far', 'trash-alt']"
           @click.stop="removeList"
-          class="removeIcon hover:text-red-500 transition duration-500 ease-in-out">
+          class="w-2/12 hover:text-red-500 transition duration-500 ease-in-out ">
         </AppIcon>
       </div>
-      <div>
+      <div class="">
         <draggable
           class="card overflow-y-auto"
           v-model="cards"
@@ -43,13 +45,15 @@
 
 <script>
 import ListCard from '@/components/ListCard.vue'
+import AutoTextarea from '@/components/AutoTextarea.vue'
 import draggable from 'vuedraggable'
 import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   components: {
     ListCard,
-    draggable
+    draggable,
+    AutoTextarea
   },
   props: {
     list: {
@@ -116,8 +120,8 @@ export default {
         event.target.value = ''
       }
     },
-    updateListTitle (e) {
-      this.updateList({
+    async updateListTitle (e) {
+      await this.updateList({
         id: this.list._id,
         data: {
           title: e.target.value
@@ -125,16 +129,16 @@ export default {
       })
       e.target.blur()
     },
-    removeList () {
-      this.deleteList({ id: this.list._id })
+    async removeList () {
+      await this.deleteList({ id: this.list._id })
     },
-    updateCardsOrder () {
+    async updateCardsOrder () {
       const cards = this.cards.map((card, index) => {
         card.order = index
         card.listId = this.list._id
         return card
       })
-      cards.forEach(card => {
+      await cards.forEach(card => {
         this.updateCard({
           id: card._id,
           data: card
@@ -155,5 +159,8 @@ export default {
 }
 .ghost-card {
   @apply border opacity-50 border-blue-500 bg-gray-200;
+}
+.list-header {
+  min-height: 20px;
 }
 </style>

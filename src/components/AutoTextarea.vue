@@ -1,21 +1,20 @@
 <template>
-  <div class="textarea">
+  <div class="flex">
     <textarea
-    v-model="currentValue"
-    class="h-0 py-0.5 px-2.5 resize-none overflow-hidden bg-secondary-100 focus:bg-white focus:text-black focus:font-medium text-white border-none font-bold text-2xl rounded-md"
-    ref="input"
-    :style="inputStyle"
+      v-model="currentValue"
+      class="h-8 py-0.5 px-2.5 resize-none rounded-md bg-gray-400 focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-xl break-words overflow-hidden"
+      ref="input"
+      :style="inputStyle"
     ></textarea>
-    <textarea class="max-h-0 pointer-events-none opacity-0 m-0"
-    v-model="currentValue"
-    ref="shadow"
-    tabindex="0"></textarea>
+    <textarea
+      class="py-0.5 px-2.5 absolute max-h-0 pointer-events-none opacity-0 m-0 font-semibold text-xl break-words"
+      v-model="currentValue"
+      ref="shadow"
+    ></textarea>
   </div>
 </template>
 
 <script>
-// import { mapState } from 'vuex'
-
 export default {
   name: 'AutoTextarea',
   props: {
@@ -23,8 +22,7 @@ export default {
   },
   data () {
     return {
-      inputHeight: '0',
-      inputWidth: '0'
+      inputHeight: '0'
     }
   },
   mounted () {
@@ -42,8 +40,6 @@ export default {
     inputStyle () {
       return {
         'min-height': this.inputHeight
-        // 'min-width': this.inputWidth
-        // 'width': this.inputWidth
       }
     }
   },
@@ -55,8 +51,6 @@ export default {
   methods: {
     resize () {
       this.inputHeight = `${this.$refs.shadow.scrollHeight}px`
-      // this.inputWidth = `${this.$refs.input.scrollWidth}px`
-      // console.log(this.$refs.input.clientWidth)
     }
   }
 }
