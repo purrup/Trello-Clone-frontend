@@ -38,7 +38,8 @@
         <input type="text"
                 class="block h-10 w-full bg-transparent border-none text-base text-gray-600 placeholder-gray-700 focus:bg-white focus:text-black focus:font-medium"
                 placeholder="+ Add New Card"
-                @keyup.enter="addCard($event, cards)">
+                @keyup.enter="addCard($event, cards)"
+                >
       </div>
     </div>
 </template>
@@ -66,6 +67,9 @@ export default {
       showRemoveIcon: false
     }
   },
+  // mounted () {
+  //   console.log('list: ', this.list)
+  // },
   computed: {
     ...mapState('user', {
       user: state => state.user

@@ -9,7 +9,7 @@
         <transition-group class="flex flex-row items-start">
           <BoardList
             v-for="(list, index) of lists"
-            :key="index"
+            :key="list._id ? list._id : index"
             :list="list"
             :board="board"
             />
@@ -75,7 +75,9 @@ export default {
     },
     dragOptions () {
       return {
-        animation: 100
+        animation: 100,
+        filter: 'textarea, input',
+        preventOnFilter: false
       }
     }
   },

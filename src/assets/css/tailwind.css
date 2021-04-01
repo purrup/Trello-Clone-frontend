@@ -5,4 +5,5 @@
 .list {
   @apply bg-list-gray p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
+  max-width: 350px;
 }

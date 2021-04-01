@@ -1,7 +1,7 @@
 <template>
   <div class="header h-auto flex justify-between items-center overflow-auto pb-2">
     <span
-    class="h-0 px-4 whitespace-pre overflow-hidden absolute font-bold text-xl"
+    class="h-0 px-4 whitespace-nowrap overflow-hidden absolute font-bold text-xl"
     ref="hideSpan">{{ boardTitle }}</span>
     <input
     type="text"

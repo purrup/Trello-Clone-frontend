@@ -1,14 +1,20 @@
 <template>
-  <div class="flex">
+  <div
+    class="flex">
+    <span
+      v-show="!editMode"
+      @click="changeEditMode"
+      class="w-full text-base break-words whitespace-pre-wrap font-semibold cursor-default">{{currentValue}}</span>
     <textarea
+      v-show="editMode"
       v-model="currentValue"
-      class="h-8 py-0.5 px-2.5 resize-none rounded-md bg-list-gray focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-base break-words overflow-hidden"
+      class="w-full resize-none rounded-md bg-list-gray focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-base break-words whitespace-pre-wrap overflow-hidden"
       ref="input"
-      :style="inputStyle"
-      @blur="$emit('blurFromTextarea', $event.target.value)"
+      :style="minHeight"
+      @blur="$emit('blurFromTextarea', $event.target.value); changeEditMode()"
     ></textarea>
     <textarea
-      class="py-0.5 px-2.5 resize-none rounded-md absolute max-h-0 pointer-events-none opacity-0 m-0 font-semibold text-base break-words"
+      class="absolute max-h-0 pointer-events-none opacity-0 m-0 font-semibold border-none text-base break-words whitespace-pre-wrap"
       v-model="currentValue"
       ref="shadow"
     ></textarea>
@@ -23,10 +29,11 @@ export default {
   },
   data () {
     return {
-      inputHeight: '0'
+      textAreaHeight: '0',
+      editMode: false
     }
   },
-  updated () {
+  mounted () {
     this.resize()
   },
   computed: {
@@ -36,25 +43,26 @@ export default {
       },
       set (value) {
         this.$emit('input', value)
+        this.resize()
       }
     },
-    inputStyle () {
+    minHeight () {
       return {
-        'min-height': this.inputHeight
+        'min-height': this.textAreaHeight
       }
-    }
-  },
-  watch: {
-    currentValue () {
-      this.resize()
     }
   },
   methods: {
     resize () {
-      this.inputHeight = `${this.$refs.shadow.scrollHeight}px`
+      this.textAreaHeight = `${this.$refs.shadow.scrollHeight}px`
     },
-    print () {
-      console.log('blurrrrrrrr')
+    changeEditMode () {
+      this.editMode = !this.editMode
+      if (this.editMode === true) {
+        this.$nextTick(() => {
+          this.$refs.input.focus()
+        })
+      }
     }
   }
 }
