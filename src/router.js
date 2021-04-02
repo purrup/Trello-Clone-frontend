@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Board from './views/Board.vue'
-import Card from './views/Card.vue'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -10,14 +9,36 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/:boardId',
+      path: '/',
+      name: 'home',
+      component: () => import('./views/Home.vue'),
+      async beforeEnter (to, from, next) {
+        try {
+          const userCreated = '6054a8b8ad53c477636ffffc'
+          await store.dispatch('board/getBoards', userCreated)
+          next()
+        } catch (error) {
+          throw error
+        }
+      }
+    },
+    {
+      path: '/boards/:boardId',
       name: 'board',
-      component: Board,
+      component: () => import('./views/Board.vue'),
+      async beforeEnter (to, from, next) {
+        try {
+          await store.dispatch('board/getBoard', to.params.id)
+          next()
+        } catch (error) {
+          throw error
+        }
+      },
       children: [
         {
           path: 'cards/:id',
           name: 'card',
-          component: Card
+          component: () => import('./views/Card.vue')
         }
       ]
     }

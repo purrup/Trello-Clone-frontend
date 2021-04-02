@@ -24,7 +24,7 @@ export default {
       inputWidth: 0
     }
   },
-  updated () {
+  mounted () {
     this.resizeWidth()
   },
   computed: {

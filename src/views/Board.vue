@@ -50,7 +50,7 @@ export default {
     }
   },
   mounted () {
-    this.getBoard(this.$route.params.boardId)
+    // this.getBoard(this.$route.params.boardId)
   },
   computed: {
     ...mapState('board', {

@@ -1,7 +1,8 @@
 import axios from '../../utils/axios.js'
 
 const state = {
-  board: [{}]
+  board: [{}],
+  boards: []
   // {
   //   '_id': '6054a8c4753756779c0223ad',
   //   'members': [],
@@ -102,6 +103,9 @@ const mutations = {
   SET_BOARD (state, data) {
     state.board = data
   },
+  SET_BOARDS (state, data) {
+    state.boards = data
+  },
   UPDATE_BOARD_TITLE (state, value) {
     state.board.title = value
   },
@@ -127,6 +131,14 @@ const mutations = {
 }
 
 const actions = {
+  async getBoards ({ commit }, userCreated) {
+    try {
+      const response = await axios.get(`/boards/user/${userCreated}`)
+      commit('SET_BOARDS', response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
   async getBoard ({ commit }, id) {
     try {
       const { data } = await axios.get(`/boards/${id}`)

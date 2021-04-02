@@ -20,6 +20,12 @@ module.exports = {
         },
         list: {
           gray: '#EBECF0'
+        },
+        textColor: {
+          primary: '#172B4D'
+        },
+        boardCard: {
+          hover: '#005B8F'
         }
       }
     }
