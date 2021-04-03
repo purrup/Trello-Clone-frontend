@@ -13,7 +13,7 @@
       <ul
           class="w-full flex flex-1 flex-row flex-wrap justify-start items-center pt-3">
         <li
-        class="boards-list-card"
+        class="card boards-list"
         v-for="board in boards"
         :key="board._id">
           <router-link
@@ -23,7 +23,7 @@
           </router-link>
         </li>
 
-        <li class="boards-list-create-card ">
+        <li class="card create-boards">
           <div
           :to="{ name: 'home'}"
           class="w-full h-full text-textColor-primary font-normal text-base flex justify-center items-center cursor-pointer">
@@ -54,20 +54,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.boards-list-card {
-  @apply p-3 rounded-sm bg-navbar-DEFAULT relative mr-4 mb-6 transition duration-200 ease-in;
+.card {
+  @apply rounded-sm relative mr-4 mb-6 transition duration-200 ease-in;
   width: 23%;
   min-width: 190px;
   height: 96px;
+}
+
+.boards-list {
+  @apply p-3 bg-navbar-DEFAULT ;
   &:hover {
     @apply bg-boardCard-hover;
   }
 }
-.boards-list-create-card {
-  @apply rounded-sm bg-gray-300 relative mr-4 mb-5 transition duration-200 ease-in ;
-  width: 23%;
-  height: 96px;
-  min-width: 190px;
+.create-boards {
+  @apply  bg-gray-300;
   &:hover {
     @apply bg-gray-400;
   }
