@@ -15,6 +15,10 @@ const getters = {
 }
 
 const mutations = {
+  SET_USER (state, data) {
+    // console.log('SET_USER', data)
+    state.user = data
+  }
 }
 
 const actions = {

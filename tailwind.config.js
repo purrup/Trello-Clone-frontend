@@ -16,7 +16,7 @@ module.exports = {
           icon: '#7fb3d1',
           iconHover: '#3688B9',
           light: '#4e95bf',
-          DEFAULT: '#0067A3'
+          blue: '#0067A3'
         },
         list: {
           gray: '#EBECF0'
@@ -30,6 +30,10 @@ module.exports = {
       }
     }
   },
-  variants: {},
+  variants: {
+    extends: {
+      opacity: ['disabled']
+    }
+  },
   plugins: []
 }

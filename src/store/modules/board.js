@@ -111,23 +111,11 @@ const mutations = {
   },
   UPDATE_BOARD_LIST (state, value) {
     state.board.lists = value
+  },
+  ADD_NEW_BOARD (state, data) {
+    console.log('ADD_NEW_BOARD', data)
+    state.boards.push(data)
   }
-  // CREATE_CARD (state, { cards, title }) {
-  //   cards.push({
-  //     title,
-  //     description: ''
-  //   })
-  // },
-  // UPDATE_CARD (state, { card, key, value }) {
-  //   card[key] = value
-  // },
-  // MOVE_CARD (state, { listIndex, value }) {
-  //   state.board.lists[listIndex].card = value
-  // },
-  // REMOVE_CARD (state, { listIndex, cardIndex }) {
-  //   const cardList = state.board.lists[listIndex].cards
-  //   cardList.splice(cardIndex, 1)
-  // }
 }
 
 const actions = {
@@ -144,6 +132,14 @@ const actions = {
       const { data } = await axios.get(`/boards/${id}`)
       commit('SET_BOARD', data)
       commit('list/SET_LIST', data.lists, { root: true })
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async createBoard ({ commit }, { data }) {
+    try {
+      const newBoard = await axios.post(`/boards`, { data })
+      commit('ADD_NEW_BOARD', newBoard.data)
     } catch (error) {
       console.log(error)
     }

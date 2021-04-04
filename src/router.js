@@ -16,6 +16,10 @@ export default new Router({
         try {
           const userCreated = '6054a8b8ad53c477636ffffc'
           await store.dispatch('board/getBoards', userCreated)
+          const data = {
+            _id: userCreated
+          }
+          store.commit('user/SET_USER', data)
           next()
         } catch (error) {
           throw error
@@ -28,7 +32,8 @@ export default new Router({
       component: () => import('./views/Board.vue'),
       async beforeEnter (to, from, next) {
         try {
-          await store.dispatch('board/getBoard', to.params.id)
+          // console.log(to.params.boardId)
+          await store.dispatch('board/getBoard', to.params.boardId)
           next()
         } catch (error) {
           throw error

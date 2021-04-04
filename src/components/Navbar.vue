@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar overflow-hidden flex justify-between items-center bg-navbar-DEFAULT w-screen p-1 px-4">
+    class="navbar overflow-hidden flex justify-between items-center bg-navbar-blue w-screen p-1 px-4">
     <div
     class="home flex justify-center items-center bg-navbar-light rounded h-8 w-8 text-white text-base hover:bg-navbar-iconHover">
       <svg xmlns="http://www.w3.org/2000/svg"

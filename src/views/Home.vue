@@ -26,7 +26,8 @@
         <li class="card create-boards">
           <div
           :to="{ name: 'home'}"
-          class="w-full h-full text-textColor-primary font-normal text-base flex justify-center items-center cursor-pointer">
+          class="w-full h-full text-textColor-primary font-normal text-base flex justify-center items-center cursor-pointer"
+          @click="isCreateCardOpen = true">
               <span>
                 建立新的看板
               </span>
@@ -35,20 +36,36 @@
       </ul>
 
     </div>
+
+    <CreateBoardModal
+      v-if="isCreateCardOpen"
+      @click.self="closeCard"
+      @close="closeCard"
+      />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import CreateBoardModal from '../components/CreateBaordModal.vue'
 export default {
+  components: {
+    CreateBoardModal
+  },
   data () {
     return {
+      isCreateCardOpen: false
     }
   },
   computed: {
     ...mapState('board', {
       boards: state => state.boards
     })
+  },
+  methods: {
+    closeCard () {
+      this.isCreateCardOpen = false
+    }
   }
 }
 </script>
@@ -62,7 +79,7 @@ export default {
 }
 
 .boards-list {
-  @apply p-3 bg-navbar-DEFAULT ;
+  @apply p-3 bg-navbar-blue ;
   &:hover {
     @apply bg-boardCard-hover;
   }
