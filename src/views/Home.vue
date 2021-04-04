@@ -72,7 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  @apply rounded-sm relative mr-4 mb-6 transition duration-200 ease-in;
+  @apply rounded-sm relative mr-7 mb-10 transition duration-200 ease-in;
   width: 23%;
   min-width: 190px;
   height: 96px;

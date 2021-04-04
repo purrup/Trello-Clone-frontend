@@ -1,4 +1,4 @@
-// import axios from '../../utils/axios.js'
+import axios from '../../utils/axios.js'
 
 const state = {
   user:
@@ -22,6 +22,15 @@ const mutations = {
 }
 
 const actions = {
+  async getUser ({ commit }, id) {
+    try {
+      const { data } = await axios.get(`/users/${id}`)
+      console.log(data)
+      commit('SET_USER', data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 export default {

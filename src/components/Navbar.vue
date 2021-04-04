@@ -1,7 +1,8 @@
 <template>
   <nav
     class="navbar overflow-hidden flex justify-between items-center bg-navbar-blue w-screen p-1 px-4">
-    <div
+    <router-link
+    :to="{ name: 'home' }"
     class="home flex justify-center items-center bg-navbar-light rounded h-8 w-8 text-white text-base hover:bg-navbar-iconHover">
       <svg xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -14,15 +15,20 @@
       </svg>
       <!-- <AppIcon
       :icon="['fas', 'home']"/> -->
-    </div>
-    <div class="trello-icon text-xl text-navbar-icon mt-1">
+    </router-link>
+    <router-link
+      :to="{ name: 'home' }"
+      class="trello-icon text-xl text-navbar-icon mt-1"
+    >
       <AppIcon
       :icon="['fab', 'trello']"/>
       <span class="font-bold">
         Trello
       </span>
-    </div>
-    <div class="user flex justify-center items-center bg-navbar-light rounded-full h-8 w-8 text-white text-base hover:bg-navbar-iconHover">
+    </router-link>
+    <router-link
+      :to="{ name: 'user', params: { id: user._id } }"
+      class="user flex justify-center items-center bg-navbar-light rounded-full h-8 w-8 text-white text-base hover:bg-navbar-iconHover cursor-pointer">
       <svg xmlns="http://www.w3.org/2000/svg"
             viewBox="-1 -1 22 22"
             fill="currentColor">
@@ -30,14 +36,33 @@
             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
             clip-rule="evenodd"/>
       </svg>
-      <!-- <AppIcon
-      :icon="['fas', 'user']"/> -->
-    </div>
+      <!-- <div
+        v-if="isUserPanelOpen"
+        class="origin-top-right absolute right-4 mt-20 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <router-link
+        :to="{ name: 'user', params: { id: user._id } }"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+        個人檔案
+        </router-link>
+      </div> -->
+    </router-link>
   </nav>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
+  data () {
+    return {
+      isUserPanelOpen: false
+    }
+  },
+  computed: {
+    ...mapState('user', {
+      user: state => state.user
+    })
+  }
 }
 </script>
 

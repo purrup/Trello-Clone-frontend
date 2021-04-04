@@ -46,6 +46,20 @@ export default new Router({
           component: () => import('./views/Card.vue')
         }
       ]
+    },
+    {
+      path: '/users/:id',
+      name: 'user',
+      component: () => import('./views/User.vue'),
+      async beforeEnter (to, from, next) {
+        try {
+          // console.log(to.params.id)
+          await store.dispatch('user/getUser', to.params.id)
+          next()
+        } catch (error) {
+          throw error
+        }
+      }
     }
   ]
 })
