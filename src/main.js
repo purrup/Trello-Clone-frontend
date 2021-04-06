@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from '../src/store'
 import '@/assets/css/tailwind.css'
+import 'nprogress/nprogress.css'
 
 Vue.config.productionTip = false
 

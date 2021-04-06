@@ -32,4 +32,17 @@ body, html {
 .container {
   @apply mx-auto;
 }
+
+#nprogress .bar {
+  background: #53A4D4 !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #53A4D4, 0 0 5px #53A4D4;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: #53A4D4;
+  border-left-color: #53A4D4;
+}
 </style>

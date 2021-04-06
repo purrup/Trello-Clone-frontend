@@ -6,6 +6,7 @@ const options = {
     'Content-Type': 'application/json'
   },
   withCredentials: true
+  // timeout: 30000
 }
 
 const instance = Axios.create(options)
