@@ -22,9 +22,9 @@ const mutations = {
 }
 
 const actions = {
-  async getUser ({ commit }, id) {
+  async getUserProfile ({ commit }, id) {
     try {
-      const { data } = await axios.get(`/users/${id}`)
+      const { data } = await axios.get(`/users/profile/${id}`)
       console.log(data)
       commit('SET_USER', data)
     } catch (error) {

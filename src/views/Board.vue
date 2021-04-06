@@ -1,5 +1,7 @@
 <template>
-  <div class="board bg-primary h-screen overflow-y-hidden">
+  <div
+  v-if="board._id"
+  class="board bg-primary h-screen overflow-y-hidden">
     <BoardHeader/>
     <div class="flex flex-row items-start">
       <draggable

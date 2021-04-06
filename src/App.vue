@@ -33,8 +33,10 @@ body, html {
   @apply mx-auto;
 }
 
+/* progress bar css setting */
 #nprogress .bar {
   background: #53A4D4 !important;
+  height: 2px !important;
 }
 
 #nprogress .peg {

@@ -49,13 +49,13 @@ const router = new Router({
       ]
     },
     {
-      path: '/users/:id',
+      path: '/users/profile/:id',
       name: 'user',
       component: () => import('./views/User.vue'),
       async beforeEnter (to, from, next) {
         try {
           // console.log(to.params.id)
-          await store.dispatch('user/getUser', to.params.id)
+          await store.dispatch('user/getUserProfile', to.params.id)
           next()
         } catch (error) {
           throw error
