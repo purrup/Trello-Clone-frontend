@@ -42,6 +42,7 @@
       @click.self="closeCard"
       @close="closeCard"
       />
+
   </div>
 </template>
 

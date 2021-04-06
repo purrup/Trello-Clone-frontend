@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed z-10 inset-0 overflow-y-auto"
+  <div class="fixed z-10 inset-0 overflow-y-auto mt-10"
   >
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
       <div
@@ -32,7 +32,7 @@
 
         <div class="bg-gray-50 py-3 sm:flex sm:flex-row">
           <button type="button"
-          class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          class="mt-3 ml-6 w-1/5 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
           @click="createBoard"
           >
             建立看板
@@ -60,13 +60,17 @@ export default {
   },
   methods: {
     async createBoard () {
-      // need notifications
-      const data = {
-        title: this.boardTitle,
-        userCreated: this.user._id
+      // need notifications and validation
+      if (this.boardTitle === '') {
+        return false
+      } else {
+        const data = {
+          title: this.boardTitle,
+          userCreated: this.user._id
+        }
+        await this.$store.dispatch('board/createBoard', { data })
+        this.$emit('close')
       }
-      await this.$store.dispatch('board/createBoard', { data })
-      this.$emit('close')
     }
   }
 }

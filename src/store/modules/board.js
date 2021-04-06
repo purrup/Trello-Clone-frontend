@@ -115,6 +115,9 @@ const mutations = {
   ADD_NEW_BOARD (state, data) {
     console.log('ADD_NEW_BOARD', data)
     state.boards.push(data)
+  },
+  DELETE_BOARD (state, id) {
+    state.boards = state.boards.filter(board => board._id !== id)
   }
 }
 
@@ -151,6 +154,14 @@ const actions = {
       })
       console.log('updatedBoard:', updatedBoard.data)
       // commit('SET_BOARD', updatedBoard[0])
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async deleteBoard ({ commit }, id) {
+    try {
+      await axios.delete(`/boards/${id}`)
+      commit('DELETE_BOARD', id)
     } catch (error) {
       console.log(error)
     }
