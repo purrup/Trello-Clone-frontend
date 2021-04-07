@@ -122,11 +122,14 @@ const mutations = {
 }
 
 const actions = {
-  async getBoards ({ commit }, userCreated) {
+  async getBoards ({ commit }) {
     try {
-      const response = await axios.get(`/boards/user/${userCreated}`)
+      const response = await axios.get(`/boards`)
       commit('SET_BOARDS', response.data)
     } catch (error) {
+      if (error.response.status === 404) {
+        console.log(error.response.data)
+      }
       console.log(error)
     }
   },

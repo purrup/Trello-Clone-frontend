@@ -22,7 +22,8 @@ module.exports = {
           gray: '#EBECF0'
         },
         textColor: {
-          primary: '#172B4D'
+          primary: '#172B4D',
+          hover: '#172B4D'
         },
         boardCard: {
           hover: '#005B8F'

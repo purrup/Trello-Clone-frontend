@@ -12,15 +12,11 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
+      meta: { showNavbar: true },
       component: () => import('./views/Home.vue'),
       async beforeEnter (to, from, next) {
         try {
-          const userCreated = '6054a8b8ad53c477636ffffc'
-          await store.dispatch('board/getBoards', userCreated)
-          const data = {
-            _id: userCreated
-          }
-          store.commit('user/SET_USER', data)
+          await store.dispatch('board/getBoards')
           next()
         } catch (error) {
           throw error
@@ -30,6 +26,7 @@ const router = new Router({
     {
       path: '/boards/:boardId',
       name: 'board',
+      meta: { showNavbar: true },
       component: () => import('./views/Board.vue'),
       async beforeEnter (to, from, next) {
         try {
@@ -44,18 +41,19 @@ const router = new Router({
         {
           path: 'cards/:id',
           name: 'card',
+          meta: { showNavbar: true },
           component: () => import('./views/Card.vue')
         }
       ]
     },
     {
-      path: '/users/profile/:id',
+      path: '/users',
       name: 'user',
+      meta: { showNavbar: true },
       component: () => import('./views/User.vue'),
       async beforeEnter (to, from, next) {
         try {
-          // console.log(to.params.id)
-          await store.dispatch('user/getUserProfile', to.params.id)
+          await store.dispatch('user/getUser')
           next()
         } catch (error) {
           throw error
@@ -63,8 +61,15 @@ const router = new Router({
       }
     },
     {
+      path: '/login',
+      name: 'login',
+      meta: { showNavbar: false },
+      component: () => import('./views/Login.vue')
+    },
+    {
       path: '*',
       name: 'NotFound',
+      meta: { showNavbar: true },
       component: () => import('./views/NotFound.vue')
     }
   ]
