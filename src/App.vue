@@ -43,8 +43,18 @@ body, html {
   box-shadow: 0 0 10px #53A4D4, 0 0 5px #53A4D4;
 }
 
+/* #nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 25% !important;
+  right: 50% !important;
+} */
+
 #nprogress .spinner-icon {
-  border-top-color: #53A4D4;
-  border-left-color: #53A4D4;
+  /* border-top-color: #53A4D4;
+  border-left-color: #53A4D4; */
+  width: 0px !important;
+  height: 0px !important;
 }
 </style>

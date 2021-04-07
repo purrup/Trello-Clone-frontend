@@ -263,3 +263,8 @@ const settings = {
 }
 
 Vue.use(VueTailwind, settings)
+Vue.component('TInput', TInput)
+Vue.component('TButton', TButton)
+Vue.component('TInputGroup', TInputGroup)
+Vue.component('TAlert', TAlert)
+Vue.component('TDialog', TDialog)

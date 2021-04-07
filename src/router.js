@@ -61,6 +61,11 @@ const router = new Router({
           throw error
         }
       }
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: () => import('./views/NotFound.vue')
     }
   ]
 })
