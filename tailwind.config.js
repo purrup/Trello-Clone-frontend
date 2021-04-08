@@ -28,6 +28,9 @@ module.exports = {
         boardCard: {
           hover: '#005B8F'
         }
+      },
+      width: {
+        '30%': '30%'
       }
     }
   },

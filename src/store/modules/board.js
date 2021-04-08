@@ -1,7 +1,7 @@
 import axios from '../../utils/axios.js'
 
 const state = {
-  board: [{}],
+  board: [],
   boards: []
   // {
   //   '_id': '6054a8c4753756779c0223ad',
@@ -156,7 +156,6 @@ const actions = {
         data
       })
       console.log('updatedBoard:', updatedBoard.data)
-      // commit('SET_BOARD', updatedBoard[0])
     } catch (error) {
       console.log(error)
     }

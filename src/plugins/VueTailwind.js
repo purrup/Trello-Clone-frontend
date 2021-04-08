@@ -15,8 +15,8 @@ const settings = {
   't-input': {
     component: TInput,
     props: {
-      fixedClasses: 'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
-      classes: 'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-blue-500 ',
+      fixedClasses: 'block w-full px-3 py-2 border-gray-400 transition duration-100 ease-in-out border rounded shadow-sm disabled:opacity-50 disabled:cursor-not-allowed focus:ring-2 focus:ring-blue-400',
+      classes: 'focus:border-blue-400',
       variants: {
         danger: 'border-red-300 bg-red-50 placeholder-red-200 text-red-900',
         success: 'border-green-300 bg-green-50 placeholder-gray-400 text-green-900'
@@ -26,8 +26,8 @@ const settings = {
   't-button': {
     component: TButton,
     props: {
-      fixedClasses: 'block px-4 py-2 transition duration-100 ease-in-out focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
-      classes: 'text-white bg-blue-500 border border-transparent shadow-sm rounded hover:bg-blue-600',
+      fixedClasses: 'block px-4 py-2 transition duration-100 ease-in-out focus:border-blue-400 focus:ring-2 focus:ring-blue-400 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+      classes: 'text-white bg-blue-600 border border-transparent shadow-sm rounded hover:bg-blue-500',
       variants: {
         secondary: 'text-gray-800 bg-white border border-gray-300 shadow-sm hover:text-gray-600',
         error: 'text-white bg-red-500 border border-transparent rounded shadow-sm hover:bg-red-600',
@@ -263,8 +263,9 @@ const settings = {
 }
 
 Vue.use(VueTailwind, settings)
-Vue.component('TInput', TInput)
-Vue.component('TButton', TButton)
-Vue.component('TInputGroup', TInputGroup)
-Vue.component('TAlert', TAlert)
-Vue.component('TDialog', TDialog)
+// Vue.component('TInput', TInput)
+// Vue.component('TButton', TButton)
+// Vue.component('TInputGroup', TInputGroup)
+// Vue.component('TAlert', TAlert)
+// Vue.component('TDialog', TDialog)
+// Vue.component('TCard', TCard)

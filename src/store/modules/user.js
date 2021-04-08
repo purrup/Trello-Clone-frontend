@@ -29,12 +29,21 @@ const mutations = {
 }
 
 const actions = {
+  async signup ({ commit }, data) {
+    try {
+      console.log(data)
+      const response = await axios.post(`/signup`, data)
+      commit('SET_USER', response.data)
+      commit('SET_login')
+    } catch (error) {
+      console.log(error)
+    }
+  },
   async login ({ commit }, data) {
     try {
-      // console.log(data)
       const response = await axios.post(`/login`, data)
       commit('SET_USER', response.data)
-      return response.data
+      commit('SET_login')
     } catch (error) {
       console.log(error)
     }

@@ -6,4 +6,11 @@
   @apply bg-list-gray p-2 mr-4 text-left shadow rounded;
   min-width: 350px;
   max-width: 350px;
+},
+
+.signup-login-input {
+  @apply w-full text-gray-800 placeholder-gray-400 font-bold bg-gray-50 border-gray-300 mb-6;
+  &:hover {
+    @apply bg-gray-100;
+  }
 }

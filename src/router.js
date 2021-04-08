@@ -67,6 +67,12 @@ const router = new Router({
       component: () => import('./views/Login.vue')
     },
     {
+      path: '/signup',
+      name: 'signup',
+      meta: { showNavbar: false },
+      component: () => import('./views/Signup.vue')
+    },
+    {
       path: '*',
       name: 'NotFound',
       meta: { showNavbar: true },
