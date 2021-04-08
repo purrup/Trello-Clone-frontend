@@ -31,6 +31,28 @@ module.exports = {
       },
       width: {
         '30%': '30%'
+      },
+      keyframes: {
+        'fade-in-right': {
+          '0%': {
+            opacity: '0',
+            transform: 'translateX(50px)'
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateX(0)'
+          }
+        },
+        'fade-out-right': {
+          'from': {
+            opacity: '1',
+            transform: 'translateX(0px)'
+          },
+          'to': {
+            opacity: '0',
+            transform: 'translateX(-50px)'
+          }
+        }
       }
     }
   },

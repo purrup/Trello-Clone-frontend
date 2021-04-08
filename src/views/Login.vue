@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center bg-gray-50">
-    <div class="lg:w-30% mx-auto mt-20 space-y-7 sm:w-1/2">
+    <div class="lg:w-30% lg:mt-36 mx-auto mt-24 space-y-7 sm:w-1/2  2xl:w-1/4 2xl:mt-40">
       <div class="logo mx-auto h-12 w-auto text-primary text-5xl">
         <AppIcon
         :icon="['fab', 'trello']"/>
@@ -56,12 +56,15 @@ export default {
   },
   methods: {
     async login () {
+      if (!this.email || !this.password) {
+        this.$store.commit('notification/SET_ERROR_MESSAGE', '請填入所有欄位')
+        return
+      }
       const data = {
         email: this.email,
         password: this.password
       }
       await this.$store.dispatch('user/login', data)
-      this.$router.push({ name: 'home' })
     }
   }
 }

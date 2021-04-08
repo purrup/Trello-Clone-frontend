@@ -99,7 +99,6 @@ export default {
     deleteBoard (boolean) {
       if (boolean === true) {
         this.$store.dispatch('board/deleteBoard', this.board._id)
-        console.log('delete')
         this.$router.push({ name: 'home' })
       }
       this.isConfirmModalOpen = false

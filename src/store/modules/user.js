@@ -1,4 +1,5 @@
 import axios from '../../utils/axios.js'
+import router from '../../router.js'
 
 const state = {
   user: {},
@@ -31,11 +32,15 @@ const mutations = {
 const actions = {
   async signup ({ commit }, data) {
     try {
-      console.log(data)
       const response = await axios.post(`/signup`, data)
       commit('SET_USER', response.data)
+      commit('notification/SET_SUCCESS_MESSAGE', `註冊成功！歡迎${response.data.name}！`, { root: true })
       commit('SET_login')
+      router.push({ name: 'home' })
     } catch (error) {
+      if (error.response.status) {
+        commit('notification/SET_ERROR_MESSAGE', error.response.data.message, { root: true })
+      }
       console.log(error)
     }
   },
@@ -44,13 +49,19 @@ const actions = {
       const response = await axios.post(`/login`, data)
       commit('SET_USER', response.data)
       commit('SET_login')
+      commit('notification/SET_SUCCESS_MESSAGE', '登入成功！', { root: true })
+      router.push({ name: 'home' })
     } catch (error) {
+      if (error.response.status === 401) {
+        commit('notification/SET_ERROR_MESSAGE', error.response.data.message, { root: true })
+      }
       console.log(error)
     }
   },
   async logout ({ commit }) {
     try {
       await axios.post('/logout')
+      commit('notification/SET_SUCCESS_MESSAGE', '登出成功！', { root: true })
     } catch (error) {
       console.log(error)
     }
@@ -58,7 +69,6 @@ const actions = {
   async getUser ({ commit }) {
     try {
       const { data } = await axios.get(`/users`)
-      // console.log(data)
       commit('SET_USER', data)
     } catch (error) {
       console.log(error)

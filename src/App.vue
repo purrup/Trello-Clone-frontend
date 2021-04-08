@@ -1,16 +1,30 @@
 <template>
   <div id="app">
-    <Navbar/>
+    <Navbar
+    v-if="$route.meta.showNavbar"/>
     <router-view/>
+    <Notification
+      :successMessage="successMessage"
+      :errorMessage="errorMessage"
+    />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import Notification from '@/components/Notification.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
-    Navbar
+    Navbar,
+    Notification
+  },
+  computed: {
+    ...mapState('notification', {
+      successMessage: state => state.successMessage,
+      errorMessage: state => state.errorMessage
+    })
   }
 }
 </script>
@@ -50,6 +64,10 @@ body, html {
   top: 25% !important;
   right: 50% !important;
 } */
+
+#nprogress .spinner {
+  opacity: 0 !important;
+}
 
 #nprogress .spinner-icon {
   /* border-top-color: #53A4D4;

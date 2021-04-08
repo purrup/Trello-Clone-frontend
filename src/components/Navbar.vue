@@ -1,6 +1,5 @@
 <template>
   <nav
-    v-if="$route.meta.showNavbar"
     class="navbar overflow-hidden flex justify-between items-center bg-navbar-blue w-screen p-1 px-4">
     <router-link
     :to="{ name: 'home' }"

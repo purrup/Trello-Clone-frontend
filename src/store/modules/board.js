@@ -162,7 +162,8 @@ const actions = {
   },
   async deleteBoard ({ commit }, id) {
     try {
-      await axios.delete(`/boards/${id}`)
+      const response = await axios.delete(`/boards/${id}`)
+      commit('notification/SET_SUCCESS_MESSAGE', `已刪除看板: ${response.data.title}`, { root: true })
       commit('DELETE_BOARD', id)
     } catch (error) {
       console.log(error)
