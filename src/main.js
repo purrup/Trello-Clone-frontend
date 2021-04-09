@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import './plugins/fontawesome'
 import './plugins/VueTailwind'
+import './plugins/validation'
 import App from './App.vue'
 import router from './router'
 import store from '../src/store'

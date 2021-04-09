@@ -12,25 +12,34 @@
         <h2 class="mt-6 text-center text-lg font-extrabold text-texColor-priamry">
           登入 Trello
         </h2>
-        <div class="flex flex-col justify-center items-start p-8">
-          <t-input
-              class="signup-login-input "
-              variant="error"
+        <div class="flex flex-col justify-start items-start p-8">
+          <div class="form-group w-full flex flex-col justify-center items-start space-y-6">
+            <ValidationInput
+              class="w-full"
               v-model="email"
+              rules="required|email"
+              name="email"
               type="email"
               autocomplete="email"
-              placeholder="輸入電子郵件"/>
-          <t-input
-              class="signup-login-input "
-              variant="error"
+              placeholder="輸入電子郵件"
+              :className="['signup-login-input']"
+            />
+            <ValidationInput
+              class="w-full"
               v-model="password"
+              rules="required|min:3"
+              name="password"
               type="password"
+              autocomplete="current-password"
               placeholder="輸入密碼"
-              autocomplete="current-password"/>
+              :className="['signup-login-input']"
+            />
+
+          </div>
           <t-button
               @click="login"
               type="button"
-              class="w-full mt-6">
+              class="w-full mt-12">
             登入
           </t-button>
 
@@ -46,8 +55,12 @@
 </template>
 
 <script>
+import ValidationInput from '../components/ValidationInput.vue'
 
 export default {
+  components: {
+    ValidationInput
+  },
   data () {
     return {
       email: '',
@@ -71,5 +84,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
