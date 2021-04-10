@@ -13,37 +13,50 @@
           註冊 Trello
         </h2>
         <div class="flex flex-col justify-center items-start p-8">
-          <t-input
-              class="signup-login-input "
-              variant="error"
+          <div class="form-group w-full flex flex-col justify-center items-start space-y-6">
+            <ValidationInput
+              class="w-full"
               v-model="email"
+              rules="required|email"
+              name="email"
               type="email"
               autocomplete="email"
-              placeholder="輸入電子郵件"/>
-          <t-input
-              class="signup-login-input "
-              variant="error"
+              placeholder="電子郵件"
+              :className="['signup-login-input']"
+            />
+            <ValidationInput
+              class="w-full"
               v-model="name"
-              type="text"
-              placeholder="輸入姓名"/>
-          <t-input
-              class="signup-login-input "
-              variant="error"
+              rules="required"
+              name="name"
+              type="name"
+              autocomplete="name"
+              placeholder="姓名或暱稱"
+              :className="['signup-login-input']"
+            />
+            <ValidationInput
+              class="w-full"
               v-model="password"
+              rules="required|min:3"
+              name="password"
               type="password"
-              placeholder="輸入密碼"
-              autocomplete="current-password"/>
+              autocomplete="current-password"
+              placeholder="密碼"
+              :className="['signup-login-input']"
+            />
+          </div>
+
           <t-button
               @click="signUp"
               type="button"
-              class="w-full mt-6">
+              class="w-full mt-12">
             註冊
           </t-button>
 
           <router-link
             class="w-full text-blue-500 border-t border-gray-300 mt-10 pt-6"
             :to="{ name: 'login'}">
-              已經有帳號了？ 登入
+              已經有帳號？ 由此登入
             </router-link>
         </div>
       </t-card>
@@ -52,8 +65,12 @@
 </template>
 
 <script>
+import ValidationInput from '../components/ValidationInput.vue'
 
 export default {
+  components: {
+    ValidationInput
+  },
   data () {
     return {
       email: '',

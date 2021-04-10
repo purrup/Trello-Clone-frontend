@@ -1,88 +1,9 @@
 import axios from '../../utils/axios.js'
+import router from '../../router.js'
 
 const state = {
   board: [],
   boards: []
-  // {
-  //   '_id': '6054a8c4753756779c0223ad',
-  //   'members': [],
-  //   'title': 'Board title-0',
-  //   'userCreated': '6054a8b8ad53c477636ffffc',
-  //   '__v': 0,
-  //   'lists': [
-  //     {
-  //       '_id': '6054a8cb9ebf1477b941162a',
-  //       'title': 'List title-0',
-  //       'boardId': '6054a8c4753756779c0223ad',
-  //       'userCreated': '6054a8b8ad53c477636ffffa',
-  //       'order': 0,
-  //       '__v': 0,
-  //       'cards': [
-  //         {
-  //           '_id': '6054a8d27f33d677da9c5ff3',
-  //           'members': [],
-  //           'title': 'Card title-3',
-  //           'listId': '6054a8cb9ebf1477b941162a',
-  //           'boardId': '6054a8c4753756779c0223ad',
-  //           'userCreated': '6054a8b8ad53c477636ffffc',
-  //           'order': 3,
-  //           '__v': 0
-  //         },
-  //         {
-  //           '_id': '6054a8d27f33d677da9c5ff4',
-  //           'members': [],
-  //           'title': 'Card title-4',
-  //           'listId': '6054a8cb9ebf1477b941162a',
-  //           'boardId': '6054a8c4753756779c0223ad',
-  //           'userCreated': '6054a8b8ad53c477636ffffb',
-  //           'order': 4,
-  //           '__v': 0
-  //         },
-  //         {
-  //           '_id': '6054a8d27f33d677da9c5ff7',
-  //           'members': [],
-  //           'title': 'Card title-7',
-  //           'listId': '6054a8cb9ebf1477b941162a',
-  //           'boardId': '6054a8c4753756779c0223ad',
-  //           'userCreated': '6054a8b8ad53c477636ffffd',
-  //           'order': 7,
-  //           '__v': 0
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       '_id': '6054a8cb9ebf1477b941162c',
-  //       'title': 'List title-2',
-  //       'boardId': '6054a8c4753756779c0223ad',
-  //       'userCreated': '6054a8b8ad53c477636ffffb',
-  //       'order': 2,
-  //       '__v': 0,
-  //       'cards': [
-  //         {
-  //           '_id': '6054a8d27f33d677da9c5ff6',
-  //           'members': [],
-  //           'title': 'Card title-6',
-  //           'listId': '6054a8cb9ebf1477b941162c',
-  //           'boardId': '6054a8c4753756779c0223ad',
-  //           'userCreated': '6054a8b8ad53c477636ffffb',
-  //           'order': 6,
-  //           '__v': 0
-  //         },
-  //         {
-  //           '_id': '6054a8d27f33d677da9c5ff1',
-  //           'members': [],
-  //           'title': 'Card title-1',
-  //           'listId': '6054a8cb9ebf1477b941162c',
-  //           'boardId': '6054a8c4753756779c0223ad',
-  //           'userCreated': '6054a8b8ad53c477636ffff9',
-  //           'order': 1,
-  //           '__v': 0
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // }
-
 }
 
 const getters = {
@@ -139,6 +60,10 @@ const actions = {
       commit('SET_BOARD', data)
       commit('list/SET_LIST', data.lists, { root: true })
     } catch (error) {
+      if (error.response.status === 404) {
+        console.log(error.response.data)
+        router.push({ name: 'NotFound' })
+      }
       console.log(error)
     }
   },

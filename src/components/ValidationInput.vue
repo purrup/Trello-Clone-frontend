@@ -55,6 +55,15 @@ export default {
     },
     placeholder: {
       type: String
+    },
+    value: {
+      type: null,
+      default: ''
+    }
+  },
+  created () {
+    if (this.value) {
+      this.innerValue = this.value
     }
   },
   data () {
@@ -65,6 +74,11 @@ export default {
   watch: {
     innerValue (value) {
       this.$emit('input', value)
+    },
+    value (value) {
+      if (value !== this.innerValue) {
+        this.innerValue = value
+      }
     }
   }
 }

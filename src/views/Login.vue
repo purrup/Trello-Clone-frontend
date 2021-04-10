@@ -21,7 +21,7 @@
               name="email"
               type="email"
               autocomplete="email"
-              placeholder="輸入電子郵件"
+              placeholder="電子郵件"
               :className="['signup-login-input']"
             />
             <ValidationInput
@@ -31,7 +31,7 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              placeholder="輸入密碼"
+              placeholder="密碼"
               :className="['signup-login-input']"
             />
 
@@ -69,10 +69,6 @@ export default {
   },
   methods: {
     async login () {
-      if (!this.email || !this.password) {
-        this.$store.commit('notification/SET_ERROR_MESSAGE', '請填入所有欄位')
-        return
-      }
       const data = {
         email: this.email,
         password: this.password
