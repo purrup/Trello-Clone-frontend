@@ -1,5 +1,5 @@
 <template>
-  <div class="header h-auto flex justify-between items-center overflow-auto pb-2">
+  <div class="header h-auto w-screen flex justify-between items-center overflow-hidden bg-primary pt-2 px-4">
     <span
     class="h-0 px-6 whitespace-nowrap overflow-hidden absolute font-bold text-xl"
     ref="hideSpan">{{ boardTitle }}</span>

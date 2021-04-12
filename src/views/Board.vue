@@ -1,38 +1,42 @@
 <template>
-  <div
-  v-if="board._id"
-  class="board bg-primary h-screen overflow-y-hidden">
+  <main v-if="board._id">
     <BoardHeader/>
-    <div class="flex flex-row items-start">
-      <draggable
-        v-model="lists"
-        v-bind="dragOptions"
-        @end="updateListsOrder">
-        <transition-group class="flex flex-row items-start">
-          <BoardList
-            v-for="(list, index) of lists"
-            :key="list._id ? list._id : index"
-            :list="list"
-            :board="board"
-            />
-        </transition-group>
-      </draggable>
+    <div
+    class="board bg-primary overflow-x-scroll px-4 py-2 pb-4">
+      <div class="flex flex-row items-start h-full max-h-full">
+        <draggable
+          class="h-full max-h-full"
+          v-model="lists"
+          v-bind="dragOptions"
+          @end="updateListsOrder">
+          <transition-group
+          tag="div"
+          class="flex flex-row items-start h-full max-h-full">
+            <BoardList
+              v-for="(list, index) of lists"
+              :key="list._id ? list._id : index"
+              :list="list"
+              :board="board"
+              />
+          </transition-group>
+        </draggable>
 
-      <div class="list flex">
-        <input type="text"
-               class="p-2 mr-2 flex-grow bg-white border-none text-base"
-               placeholder="+ Add New List"
-               @keyup.enter="createList">
+        <div class="list flex">
+          <input type="text"
+                class="p-2 mr-2 flex-grow bg-white border-none text-base"
+                placeholder="+ 新增其他列表"
+                @keyup.enter="createList">
+        </div>
+      </div>
+
+      <div
+        v-if="isCardOpen"
+        class="card-bg w-screen h-screen absolute"
+        @click.self="close">
+        <router-view />
       </div>
     </div>
-
-    <div
-      v-if="isCardOpen"
-      class="card-bg w-screen h-screen absolute"
-      @click.self="close">
-      <router-view />
-    </div>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -121,7 +125,9 @@ export default {
 <style lang="css" scoped>
 
 .board {
-  @apply px-4 py-2 overflow-x-auto;
+  /* Navbar 40px, boardheader 44px*/
+  height: calc(100vh - 40px - 44px);
+  max-height: calc(100vh - 40px - 44px);
 }
 
 .card-bg {
