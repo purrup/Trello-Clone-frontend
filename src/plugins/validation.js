@@ -29,3 +29,11 @@ extend('min', {
   params: ['length'],
   message: '{_field_}必須至少有 {length} 字元'
 })
+
+extend('max', {
+  validate (value, { length }) {
+    return value.length <= length
+  },
+  params: ['length'],
+  message: '{_field_}無法超過 {length} 字元'
+})

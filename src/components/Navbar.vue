@@ -39,7 +39,7 @@
       </svg>
       <div
         v-if="isUserPanelOpen"
-        class="origin-top-right absolute right-5 mt-32 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        class="origin-top-right absolute right-5 mt-32 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
         <router-link
         :to="{ name: 'user'}"
         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">

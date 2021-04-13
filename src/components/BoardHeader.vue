@@ -22,7 +22,7 @@
       </svg>
       <div
         v-if="isOptionOpen"
-        class="optioin-button-group origin-top-right absolute right-4 mt-20 w-28 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+        class="optioin-button-group origin-top-right absolute right-4 mt-20 w-28 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
         <div class="delete-board block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-red-600"
         @click="isConfirmModalOpen = true">
           <AppIcon

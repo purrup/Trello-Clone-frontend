@@ -157,13 +157,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.card {
-}
 .ghost-card {
   @apply border opacity-50 border-blue-500 bg-gray-200;
 }
 .list-header {
-  /* height: 32px; */
+  height: 50px;
   min-height: 32px;
 }
 </style>

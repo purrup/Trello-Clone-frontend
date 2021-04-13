@@ -1,32 +1,32 @@
 <template>
   <div
-    class="flex relative">
-    <span
-      v-show="!editMode"
-      @click="changeEditMode"
-      class="w-full text-base break-words whitespace-pre-wrap font-semibold cursor-default">{{currentValue}}</span>
-    <ValidationProvider
-          rules="required"
-          name="列表標題"
-          detectInput
-          v-slot="{ errors, classes }">
-          <div :class="classes">
-            <textarea
-              v-show="editMode"
-              v-model="currentValue"
-              class="w-full resize-none p-0 rounded bg-list-gray focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-base break-words whitespace-pre-wrap overflow-hidden"
-              ref="textarea"
-              :style="minHeight"
-              @blur="$emit('blurFromTextarea', $event.target.value); changeEditMode($event.target.value)"
-            ></textarea>
-            <span class="float-left mt-1 text-sm">{{ errors[0] }}</span>
-          </div>
-    </ValidationProvider>
-    <textarea
-      class="w-full absolute pointer-events-none max-h-0 m-0 p-0 font-semibold border-none text-base break-words whitespace-pre-wrap resize-none "
-      v-model="currentValue"
-      ref="shadow"
-    ></textarea>
+    class="flex max-h-full h-full relative">
+      <span
+        v-show="!editMode"
+        @click="changeEditMode"
+        class="w-full text-base break-words whitespace-pre-wrap font-semibold cursor-default overflow-y-scroll overflow-x-hidden max-h-full h-full">{{currentValue}}</span>
+      <ValidationProvider
+            rules="required"
+            name="列表標題"
+            detectInput
+            v-slot="{ errors, classes }">
+            <div :class="classes">
+              <textarea
+                v-show="editMode"
+                v-model="currentValue"
+                class="w-full resize-none p-0 rounded bg-list-gray focus:bg-white focus:text-black focus:font-medium text-black font-semibold border-none text-base break-words whitespace-pre-wrap overflow-y-scroll"
+                ref="textarea"
+                :style="style"
+                @blur="$emit('blurFromTextarea', $event.target.value); changeEditMode($event.target.value)"
+              ></textarea>
+              <span class="float-left mt-1 text-sm">{{ errors[0] }}</span>
+            </div>
+      </ValidationProvider>
+      <textarea
+        class="inset-0 absolute w-full pointer-events-none max-h-0 m-0 p-0 font-semibold border-none text-base break-words whitespace-pre-wrap resize-none"
+        v-model="currentValue"
+        ref="shadow"
+      ></textarea>
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
   data () {
     return {
       textAreaHeight: '28px',
+      textAreaWidth: '',
       editMode: false
     }
   },
@@ -60,22 +61,18 @@ export default {
         this.resize()
       }
     },
-    minHeight () {
+    style () {
       return {
         'height': this.textAreaHeight,
+        'min-width': this.textAreaWidth,
         'min-height': this.textAreaHeight
       }
     }
   },
   methods: {
     resize () {
-      if (this.$refs.textarea.scrollHeight > this.$refs.textarea.clientHeight) {
-        this.textAreaHeight = `${this.$refs.textarea.scrollHeight}px`
-
-        // 刪字時減少行數，依據shadow的scrollHeight
-      } else if (this.$refs.textarea.scrollHeight > this.$refs.shadow.scrollHeight) {
-        this.textAreaHeight = `${this.$refs.shadow.scrollHeight}px`
-      }
+      this.textAreaHeight = `${this.$refs.shadow.scrollHeight}px`
+      this.textAreaWidth = `${this.$refs.shadow.scrollWidth}px`
     },
     changeEditMode (value) {
       if (value === '') {
@@ -109,5 +106,9 @@ export default {
   textarea {
     @apply border-blue-400;
   }
+}
+
+.shadow {
+  // z-index: -1;
 }
 </style>
