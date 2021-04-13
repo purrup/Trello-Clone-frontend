@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    contents: [
+    content: [
       './src/**/*.html',
       './src/**/*.vue',
       '.src/plugins/VueTailwind.js',
