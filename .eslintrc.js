@@ -24,6 +24,7 @@ module.exports = {
       }
     ],
     'vue/html-closing-bracket-newline': ['off'],
-    'vue/attribute-hyphenation': ['off']
+    'vue/attribute-hyphenation': ['off'],
+    'no-console': ['off']
   }
 }
