@@ -1,8 +1,12 @@
 module.exports = {
-  purge: [
-    './src/**/*.html',
-    './src/**/*.vue'
-  ],
+  purge: {
+    contents: [
+      './src/**/*.html',
+      './src/**/*.vue',
+      '.src/plugins/VueTailwind.js',
+      'node_modules/vue-tailwind/dist/*.js'
+    ]
+  },
   theme: {
     extend: {
       colors: {
