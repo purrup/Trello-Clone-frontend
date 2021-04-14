@@ -14,6 +14,7 @@
 import Navbar from '@/components/Navbar.vue'
 import Notification from '@/components/Notification.vue'
 import { mapState } from 'vuex'
+import axios from '../src/utils/axios.js'
 
 export default {
   components: {
@@ -24,6 +25,16 @@ export default {
     ...mapState('notification', {
       successMessage: state => state.successMessage,
       errorMessage: state => state.errorMessage
+    }),
+    ...mapState('user', {
+      token: state => state.token
+    })
+  },
+  created () {
+    // 發送每個api前都會夾帶token進header
+    axios.interceptors.request.use((config) => {
+      config.headers.Authorization = 'Bearer ' + this.token
+      return config
     })
   }
 }

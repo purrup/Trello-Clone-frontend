@@ -81,11 +81,7 @@ const actions = {
   },
   async getUser ({ commit }) {
     try {
-      const { data } = await axios.get(`/users`, {
-        headers: {
-          'Authorization': `Bearer ${state.token}`
-        }
-      })
+      const { data } = await axios.get(`/users`)
       commit('SET_USER', data)
     } catch (error) {
       console.log(error)

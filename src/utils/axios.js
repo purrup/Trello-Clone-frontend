@@ -1,5 +1,7 @@
 import Axios from 'axios'
-// import store from '../store'
+// import { store } from '../store'
+
+// console.log(store.state.user)
 
 const options = {
   baseURL: process.env.NODE_ENV === 'production' ? 'https://trello-clone-backend-2021.herokuapp.com/' : 'http://localhost:3000/',

@@ -49,11 +49,12 @@ const mutations = {
 const actions = {
   async getBoards ({ commit, rootState }) {
     try {
-      const response = await axios.get(`/boards`, {
-        headers: {
-          'Authorization': `Bearer ${rootState.user.token}`
-        }
-      })
+      // const response = await axios.get(`/boards`, {
+      //   headers: {
+      //     'Authorization': `Bearer ${rootState.user.token}`
+      //   }
+      // })
+      const response = await axios.get(`/boards`)
       commit('SET_BOARDS', response.data)
     } catch (error) {
       if (error.response.status === 404) {
