@@ -11,6 +11,12 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      name: 'landing',
+      meta: { showNavbar: false },
+      component: () => import('./views/Landing.vue')
+    },
+    {
+      path: '/home',
       name: 'home',
       meta: { showNavbar: true },
       component: () => import('./views/Home.vue'),
