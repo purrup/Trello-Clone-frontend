@@ -39,16 +39,25 @@ const mutations = {
   },
   DELETE_BOARD (state, id) {
     state.boards = state.boards.filter(board => board._id !== id)
+  },
+  RESET_BOARD (state) {
+    state.board = []
+    state.boards = []
   }
 }
 
 const actions = {
-  async getBoards ({ commit }) {
+  async getBoards ({ commit, rootState }) {
     try {
-      const response = await axios.get(`/boards`)
+      const response = await axios.get(`/boards`, {
+        headers: {
+          'Authorization': `Bearer ${rootState.user.token}`
+        }
+      })
       commit('SET_BOARDS', response.data)
     } catch (error) {
       if (error.response.status === 404) {
+        commit('SET_BOARDS', [])
         console.log(error.response.data)
       }
       console.log(error)
