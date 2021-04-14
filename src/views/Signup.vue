@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen flex items-start justify-center bg-gray-50">
-    <div class="lg:w-30% mx-auto mt-24 space-y-7 sm:w-1/2 2xl:w-1/4 2xl:mt-40 lg:mt-36">
+    <div class="lg:w-30% mx-auto mt-16 space-y-7 sm:w-1/2 2xl:w-1/4 2xl:mt-32">
       <div class="logo mx-auto h-12 w-auto text-primary text-5xl">
         <AppIcon
         :icon="['fab', 'trello']"/>
@@ -57,7 +57,15 @@
             class="w-full text-blue-500 border-t border-gray-300 mt-10 pt-6"
             :to="{ name: 'login'}">
               已經有帳號？ 由此登入
-            </router-link>
+          </router-link>
+          <div class="border-t w-full border-gray-300 mt-6 pt-6">
+            <t-button
+                @click="loginAsTrial"
+                type="button"
+                class="w-full">
+              略過註冊，試用帳號登入
+            </t-button>
+          </div>
         </div>
       </t-card>
     </div>
@@ -86,6 +94,13 @@ export default {
         password: this.password
       }
       await this.$store.dispatch('user/signup', data)
+    },
+    async loginAsTrial () {
+      const data = {
+        email: 'trial@gmail.com',
+        password: '123'
+      }
+      await this.$store.dispatch('user/login', data)
     }
   }
 }
