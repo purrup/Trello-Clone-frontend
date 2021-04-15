@@ -5,6 +5,15 @@ import NProgress from 'nprogress'
 
 Vue.use(Router)
 
+// 若未登入，導回登入頁
+const authLogin = (next) => {
+  if (store.getters['user/isLogin'] === true) {
+    next()
+    return
+  }
+  next('/login')
+}
+
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -22,6 +31,7 @@ const router = new Router({
       component: () => import('./views/Home.vue'),
       async beforeEnter (to, from, next) {
         try {
+          authLogin(next)
           await store.dispatch('board/getBoards')
           next()
         } catch (error) {
@@ -36,7 +46,7 @@ const router = new Router({
       component: () => import('./views/Board.vue'),
       async beforeEnter (to, from, next) {
         try {
-          // console.log(to.params.boardId)
+          authLogin(next)
           await store.dispatch('board/getBoard', to.params.boardId)
           next()
         } catch (error) {
@@ -59,6 +69,7 @@ const router = new Router({
       component: () => import('./views/User.vue'),
       async beforeEnter (to, from, next) {
         try {
+          authLogin(next)
           await store.dispatch('user/getUser')
           next()
         } catch (error) {
