@@ -61,7 +61,7 @@ module.exports = {
     }
   },
   variants: {
-    extends: {
+    extend: {
       opacity: ['disabled'],
       cursor: ['disabled']
     }

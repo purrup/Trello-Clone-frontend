@@ -13,45 +13,51 @@
           註冊 Trello
         </h2>
         <div class="flex flex-col justify-center items-start p-8">
-          <div class="form-group w-full flex flex-col justify-center items-start space-y-6">
-            <ValidationInput
-              class="w-full"
-              v-model="email"
-              rules="required|email"
-              name="email"
-              type="email"
-              autocomplete="email"
-              placeholder="電子郵件"
-              :className="['signup-login-input']"
-            />
-            <ValidationInput
-              class="w-full"
-              v-model="name"
-              rules="required"
-              name="name"
-              type="name"
-              autocomplete="name"
-              placeholder="姓名或暱稱"
-              :className="['signup-login-input']"
-            />
-            <ValidationInput
-              class="w-full"
-              v-model="password"
-              rules="required|min:3"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="密碼"
-              :className="['signup-login-input']"
-            />
-          </div>
+          <ValidationObserver
+          slim
+          class="w-full"
+          v-slot="{ invalid }">
+            <div class="form-group w-full flex flex-col justify-center items-start space-y-6">
+                <ValidationInput
+                  class="w-full"
+                  v-model="email"
+                  rules="required|email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="電子郵件"
+                  :className="['signup-login-input']"
+                />
+                <ValidationInput
+                  class="w-full"
+                  v-model="name"
+                  rules="required"
+                  name="name"
+                  type="name"
+                  autocomplete="name"
+                  placeholder="姓名或暱稱"
+                  :className="['signup-login-input']"
+                />
+                <ValidationInput
+                  class="w-full"
+                  v-model="password"
+                  rules="required|min:3"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="密碼"
+                  :className="['signup-login-input']"
+                />
+            </div>
 
-          <t-button
-              @click="signUp"
-              type="button"
-              class="w-full mt-12">
-            註冊
-          </t-button>
+            <t-button
+                :disabled="invalid"
+                @click="signUp"
+                type="button"
+                class="w-full mt-12">
+              註冊
+            </t-button>
+          </ValidationObserver>
 
           <router-link
             class="w-full text-blue-500 border-t border-gray-300 mt-10 pt-6"
@@ -75,10 +81,12 @@
 
 <script>
 import ValidationInput from '../components/ValidationInput.vue'
+import { ValidationObserver } from 'vee-validate'
 
 export default {
   components: {
-    ValidationInput
+    ValidationInput,
+    ValidationObserver
   },
   data () {
     return {
