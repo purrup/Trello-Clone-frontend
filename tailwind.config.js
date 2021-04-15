@@ -2,9 +2,9 @@ module.exports = {
   purge: {
     content: [
       './src/**/*.html',
-      './src/**/*.vue'
-      // './src/plugins/VueTailwind.js',
-      // 'node_modules/vue-tailwind/dist/*.js'
+      './src/**/*.vue',
+      './src/plugins/VueTailwind.js',
+      'node_modules/vue-tailwind/dist/*.js'
     ]
   },
   theme: {
