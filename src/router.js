@@ -7,11 +7,12 @@ Vue.use(Router)
 
 // 若未登入，導回登入頁
 const authLogin = (next) => {
-  if (store.getters['user/isLogin'] === true) {
+  if (store.getters['user/isLogin'] === 'true') {
     next()
     return
   }
-  next('/login')
+  store.commit('notification/SET_ERROR_MESSAGE', '請先登入或註冊，謝謝')
+  next({ name: 'login' })
 }
 
 const router = new Router({
@@ -90,10 +91,14 @@ const router = new Router({
       component: () => import('./views/Signup.vue')
     },
     {
-      path: '*',
+      path: '/404',
       name: 'NotFound',
-      meta: { showNavbar: true },
+      meta: { showNavbar: false },
       component: () => import('./views/NotFound.vue')
+    },
+    {
+      path: '*',
+      redirect: 'NotFound'
     }
   ]
 })

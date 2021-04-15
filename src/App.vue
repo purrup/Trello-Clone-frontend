@@ -27,15 +27,38 @@ export default {
       errorMessage: state => state.errorMessage
     }),
     ...mapState('user', {
-      token: state => state.token
+      user: state => state.user,
+      token: state => state.token,
+      isLogin: state => state.isLogin
     })
   },
   created () {
+    this.setTokenInHeader()
+    this.handleUnauthorizedResponse()
+  },
+  methods: {
+    setTokenInHeader () {
     // 發送每個api前都會夾帶token進header
-    axios.interceptors.request.use((config) => {
-      config.headers.Authorization = 'Bearer ' + this.token
-      return config
-    })
+      axios.interceptors.request.use((config) => {
+        config.headers.Authorization = 'Bearer ' + this.token
+        return config
+      }, (error) => {
+        return Promise.reject(error)
+      })
+    },
+    handleUnauthorizedResponse () {
+      // reponse code 401的話退回前一個route
+      axios.interceptors.response.use((response) => {
+        // login page會回傳response.data.message，加上判斷避免notification衝突
+        if (response.status === 401 && !response.data.message) {
+          this.$store.commit('notification/SET_ERROR_MESSAGE', '抱歉，使用者權限不足')
+          this.$router.go(-1)
+        }
+        return response
+      }, (error) => {
+        return Promise.reject(error)
+      })
+    }
   }
 }
 </script>

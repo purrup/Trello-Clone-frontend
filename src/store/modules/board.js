@@ -49,11 +49,6 @@ const mutations = {
 const actions = {
   async getBoards ({ commit, rootState }) {
     try {
-      // const response = await axios.get(`/boards`, {
-      //   headers: {
-      //     'Authorization': `Bearer ${rootState.user.token}`
-      //   }
-      // })
       const response = await axios.get(`/boards`)
       commit('SET_BOARDS', response.data)
     } catch (error) {
@@ -72,6 +67,7 @@ const actions = {
     } catch (error) {
       if (error.response.status === 404) {
         console.log(error.response.data)
+        commit('notification/SET_ERROR_MESSAGE', error.response.data.message, { root: true })
         router.push({ name: 'NotFound' })
       }
       console.log(error)
@@ -81,6 +77,7 @@ const actions = {
     try {
       const newBoard = await axios.post(`/boards`, { data })
       commit('ADD_NEW_BOARD', newBoard.data)
+      commit('notification/SET_SUCCESS_MESSAGE', `已建立看板`, { root: true })
     } catch (error) {
       console.log(error)
     }

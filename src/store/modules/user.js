@@ -3,9 +3,9 @@ import router from '../../router.js'
 
 const state = {
   user: {},
-  isLogin: localStorage.getItem('isLogin') || false,
+  isLogin: localStorage.getItem('isLogin') || 'false',
   expiration: new Date(localStorage.getItem('expiration')) || false,
-  token: localStorage.getItem('token') || false
+  token: localStorage.getItem('token') || ''
 }
 
 const getters = {
@@ -26,8 +26,8 @@ const mutations = {
   },
   SET_login (state) {
     localStorage.setItem('expiration', new Date(Date.now() + 1000 * 3600 * 24))
-    localStorage.setItem('isLogin', true)
-    state.isLogin = true
+    localStorage.setItem('isLogin', 'true')
+    state.isLogin = 'true'
   },
   SET_TOKEN (state, data) {
     localStorage.setItem('token', data)
