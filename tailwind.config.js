@@ -3,7 +3,7 @@ module.exports = {
     content: [
       './src/**/*.html',
       './src/**/*.vue',
-      '.src/plugins/VueTailwind.js',
+      './src/plugins/VueTailwind.js',
       'node_modules/vue-tailwind/dist/*.js'
     ]
   },

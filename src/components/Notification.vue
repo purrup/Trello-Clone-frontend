@@ -3,11 +3,10 @@
     name="fade"
     >
     <t-alert
-    class="notification"
+    class="alert"
     :variant="variant"
     :show="show"
     :timeout="timeout"
-    @hidden="hidden"
     >
       {{ message }}
     </t-alert>
@@ -47,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.notification {
+.alert {
   @apply absolute top-4 right-7;
 }
 .fade-enter-active, .fade-leave-active {

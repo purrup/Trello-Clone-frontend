@@ -52,7 +52,7 @@
             <t-button
                 @click="loginAsTrial"
                 type="button"
-                class="w-full">
+                class="w-full bg-red-500">
               略過註冊，試用帳號登入
             </t-button>
           </div>
