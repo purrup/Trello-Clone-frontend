@@ -52,7 +52,8 @@
             <t-button
                 @click="loginAsTrial"
                 type="button"
-                class="w-full bg-red-500">
+                class="w-full"
+                :variant="'secondary'">
               略過註冊，試用帳號登入
             </t-button>
           </div>
