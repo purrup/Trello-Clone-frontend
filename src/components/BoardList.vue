@@ -41,7 +41,7 @@
         </draggable>
       </div>
       <input type="text"
-        class="h-8 w-full my-2 bg-transparent border-none text-base text-gray-600 placeholder-gray-700 focus:bg-white focus:text-black focus:font-medium"
+        class="h-8 w-full my-2 rounded bg-transparent border-none text-base text-gray-600 placeholder-gray-700 focus:bg-white focus:text-black focus:font-medium"
         placeholder="+ 新增另一張卡片"
         @keyup.enter="addCard($event, cards)"
       >

@@ -43,7 +43,7 @@ export default {
   },
   data () {
     return {
-      textAreaHeight: '28px',
+      textAreaHeight: '32px',
       textAreaWidth: '',
       editMode: false
     }
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     resize () {
-      this.textAreaHeight = `${this.$refs.shadow.scrollHeight}px`
+      this.textAreaHeight = `${this.$refs.shadow.scrollHeight + 8}px`
       this.textAreaWidth = `${this.$refs.shadow.scrollWidth}px`
     },
     changeEditMode (value) {
