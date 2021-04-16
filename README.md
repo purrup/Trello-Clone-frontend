@@ -27,7 +27,15 @@ https://trello-clone-frontend-2021.herokuapp.com/
 * 在列表之間拖曳卡片
 * 瀏覽個人檔案
 
+### Upcoming features
+
+* 可以邀請其他使用者共同協作看板
+
 ### Installing
+
+```
+git clone https://github.com/purrup/Trello-Clone-frontend.git
+```
 
 ```
 npm install

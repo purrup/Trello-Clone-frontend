@@ -28,9 +28,9 @@
       </nav>
     </header>
     <main>
-      <div class="container text-left h-full w-4/5 bg-no-repeat">
-        <div class="w-7/12 flex flex-col items-start justify-center h-full">
-          <h1 class="text-6xl font-extrabold pb-4 leading-tight">Trello 協助團隊推動工作進展。</h1>
+      <div class="container text-center md:text-left h-full w-full md:w-4/5 image bg-top bg-no-repeat sm:bg-contain sm:bg-right">
+        <div class="w-full md:w-7/12 px-5 md:p-0 pt-10 flex flex-col items-center sm:items-start justify-center h-full">
+          <h1 class="text-5xl sm:text-6xl font-extrabold pb-4 leading-tight">Trello 協助團隊推動工作進展。</h1>
           <p class="text-xl font-semibold leading-tight w-10/12">協同合作、管理專案並創造生產力的新高峰。從摩天樓到家庭辦公室，您的團隊工作方式都是獨一無二：借助 Trello 來完成一切工作。</p>
           <div class="signup-derict pt-10">
             <t-button
@@ -42,9 +42,11 @@
         </div>
       </div>
     </main>
-    <footer class="h-10">Made by
-      <router-link to="https://github.com/purrup">Vin</router-link>
-       @2021</footer>
+    <footer class="h-10">
+      <span class="px-1">Made by</span>
+      <a href="https://github.com/purrup">Vin</a>
+      <span class="px-1">@2021</span>
+    </footer>
   </div>
 </template>
 
@@ -62,9 +64,8 @@ main {
   height: calc(100vh - 68px - 40px);
 
 }
-.container {
+.image {
   background-image: url('../assets/pictures/board.svg');
-  background-position: right;
   background-size: 50%;
 }
 </style>
