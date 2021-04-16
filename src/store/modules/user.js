@@ -5,7 +5,7 @@ const state = {
   user: {},
   isLogin: localStorage.getItem('isLogin') || 'false',
   expiration: new Date(localStorage.getItem('expiration')) || false,
-  token: localStorage.getItem('token') || ''
+  token: ''
 }
 
 const getters = {
@@ -30,15 +30,15 @@ const mutations = {
     state.isLogin = 'true'
   },
   SET_TOKEN (state, data) {
-    localStorage.setItem('token', data)
+    // localStorage.setItem('token', data)
     state.token = data
   },
   SET_logout (state) {
-    state.isLogin = false
+    state.isLogin = 'false'
     localStorage.setItem('isLogin', false)
-    localStorage.removeItem('token')
+    // localStorage.removeItem('token')
     state.user = {}
-    state.token = false
+    state.token = ''
     state.expiration = false
   }
 }

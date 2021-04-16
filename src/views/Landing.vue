@@ -42,7 +42,9 @@
         </div>
       </div>
     </main>
-    <footer class="h-10">Made by Vin @2021</footer>
+    <footer class="h-10">Made by
+      <router-link to="https://github.com/purrup">Vin</router-link>
+       @2021</footer>
   </div>
 </template>
 
