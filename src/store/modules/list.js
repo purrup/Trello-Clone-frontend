@@ -34,6 +34,7 @@ const mutations = {
         if (!list.cards) {
           list.cards = []
           list.cards.push(data)
+          return
         }
         list.cards.push(data)
       }
