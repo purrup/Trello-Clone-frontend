@@ -1,35 +1,38 @@
 import axios from '../../utils/axios.js'
 
 const state = {
-  list: [{
+  lists: [{
   }]
 }
 
 const getters = {
+  getList: (state) => (id) => {
+    return state.lists.find(list => list._id === id)
+  }
 }
 
 const mutations = {
   SET_LIST (state, data) {
-    state.list = data
+    state.lists = data
   },
   MOVE_LIST (state, data) {
-    state.list = data
+    state.lists = data
   },
   UPDATE_LIST_TITLE (state, { id, data }) {
-    state.list.forEach(list => {
+    state.lists.forEach(list => {
       if (list._id === id) {
         list.title = data
       }
     })
   },
   CREATE_LIST (state, { data }) {
-    state.list.push(data)
+    state.lists.push(data)
   },
   DELETE_LIST (state, { id }) {
-    state.list = state.list.filter(list => list._id !== id)
+    state.lists = state.lists.filter(list => list._id !== id)
   },
   ADD_CARD (state, { data }) {
-    state.list.forEach(list => {
+    state.lists.forEach(list => {
       if (list._id === data.listId) {
         if (!list.cards) {
           list.cards = []
@@ -41,16 +44,16 @@ const mutations = {
     })
   },
   MOVE_CARD (state, { listId, data }) {
-    state.list.forEach(list => {
+    state.lists.forEach(list => {
       if (list._id === listId) {
         list.cards = data
       }
     })
   },
   DELETE_CARD (state, { id }) {
-    state.list.forEach((list, index) => {
+    state.lists.forEach((list, index) => {
       const cards = list.cards.filter(card => card._id !== id)
-      state.list[index].cards = cards
+      state.lists[index].cards = cards
     })
   }
 }

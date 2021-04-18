@@ -63,7 +63,7 @@ export default {
       board: state => state.board
     }),
     ...mapState('list', {
-      list: state => state.list
+      storeLists: state => state.lists
     }),
     ...mapState('user', {
       user: state => state.user
@@ -73,7 +73,7 @@ export default {
     },
     lists: {
       get () {
-        return this.list
+        return this.storeLists
       },
       set (data) {
         this.MOVE_LIST(data)

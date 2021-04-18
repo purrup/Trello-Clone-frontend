@@ -78,6 +78,12 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
+    ...mapState('list', {
+      lists: state => state.lists
+    }),
+    targetList () {
+      return this.$store.getters['list/getList'](this.list._id)
+    },
     listTitle: {
       get () {
         return this.list.title
@@ -88,7 +94,7 @@ export default {
     },
     cards: {
       get () {
-        return this.list.cards
+        return this.targetList.cards
       },
       set (data) {
         this.MOVE_CARD({ listId: this.list._id, data })
@@ -157,6 +163,7 @@ export default {
 .ghost-card {
   @apply border opacity-50 border-blue-500 bg-gray-200;
 }
+
 .list-header {
   height: 50px;
   min-height: 32px;

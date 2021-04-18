@@ -7,17 +7,17 @@ const state = {
 }
 
 const getters = {
-  getCard (state) {
-    return (id) => {
-      for (const list of state.board.lists) {
-        for (const card of list.cards) {
-          if (card._id === id) {
-            return card
-          }
-        }
-      }
-    }
-  }
+  // getCard (state) {
+  //   return (id) => {
+  //     for (const list of state.board.lists) {
+  //       for (const card of list.cards) {
+  //         if (card._id === id) {
+  //           return card
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 const mutations = {
