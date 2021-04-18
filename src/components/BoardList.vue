@@ -71,9 +71,6 @@ export default {
       showRemoveIcon: false
     }
   },
-  // mounted () {
-  //   console.log('list: ', this.list)
-  // },
   computed: {
     ...mapState('user', {
       user: state => state.user
@@ -119,7 +116,7 @@ export default {
           listId: this.list._id,
           boardId: this.board._id,
           userCreated: this.user._id,
-          order: cards.length ? cards.length : 0
+          order: cards ? cards.length : 0
         }
         await this.createCard({ data })
         event.target.value = ''

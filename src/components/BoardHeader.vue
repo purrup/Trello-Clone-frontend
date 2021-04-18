@@ -1,7 +1,7 @@
 <template>
   <div class="header h-auto w-screen flex justify-between items-center overflow-hidden bg-primary pt-2 px-4">
     <span
-    class="h-0 px-6 whitespace-nowrap overflow-hidden absolute font-bold text-xl"
+    class="h-0 px-4 whitespace-nowrap overflow-hidden absolute font-bold text-xl"
     ref="hideSpan">{{ boardTitle }}</span>
     <input
     type="text"
@@ -75,7 +75,8 @@ export default {
     },
     autoWidth () {
       return {
-        'width': `${this.inputWidth}px`
+        'width': `${this.inputWidth}px`,
+        'min-width': `${this.inputWidth}px`
       }
     }
   },
@@ -83,6 +84,10 @@ export default {
     ...mapMutations('board', ['UPDATE_BOARD_TITLE']),
     ...mapActions('board', ['updateBoard']),
     blurOnSecondEnter (e) {
+      if (event.target.value === '') {
+        this.$store.commit('notification/SET_ERROR_MESSAGE', '請填寫看板名稱')
+        return
+      }
       // 按兩次enter才會blur input，以免輸入中文時，按一次enter就blur
       this.enterTime++
       if (this.enterTime === 2) {
@@ -91,11 +96,16 @@ export default {
       }
     },
     // input blur後 dispatch updateBoard
-    async updateBoardTitle () {
+    async updateBoardTitle (event) {
+      if (event.target.value === '') {
+        this.$store.commit('notification/SET_ERROR_MESSAGE', '請填寫看板名稱')
+        event.target.focus()
+        return
+      }
       await this.updateBoard({ id: this.board._id, data: this.board })
     },
     resizeWidth () {
-      this.inputWidth = this.$refs.hideSpan.offsetWidth // offsetWidth是「元素本身」的寬度/高度，並完整了包含了邊界、捲軸及padding，所以包含了span px-4的寬度
+      this.inputWidth = this.$refs.hideSpan.offsetWidth // offsetWidth是「元素本身」的寬度，並完整了包含了邊界、捲軸及padding，所以包含了span px-4的寬度
     },
     deleteBoard (boolean) {
       if (boolean === true) {

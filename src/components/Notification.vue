@@ -6,7 +6,7 @@
     class="alert"
     :variant="variant"
     :show="show"
-    :timeout="timeout"
+    @hidden="hidden"
     >
       {{ message }}
     </t-alert>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 export default {
   props: {
     successMessage: String,
@@ -22,13 +22,14 @@ export default {
   },
   data () {
     return {
-      timeout: 6000
+      timeout: 6000,
+      show: !!this.message
     }
   },
   computed: {
-    ...mapState('notification', {
-      show: state => state.showNotification
-    }),
+    // ...mapState('notification', {
+    //   show: state => state.showNotification
+    // }),
     variant () {
       return this.successMessage ? 'success' : 'danger'
     },
@@ -39,7 +40,22 @@ export default {
   methods: {
     ...mapMutations('notification', ['DELETE_MESSAGE']),
     hidden () {
+      this.show = false
       this.DELETE_MESSAGE()
+    }
+  },
+  watch: {
+    message (newMessage) {
+      if (newMessage) {
+        this.show = true
+      }
+    },
+    show (newBoolean) {
+      if (newBoolean === true) {
+        setTimeout(() => {
+          this.show = false
+        }, this.timeout)
+      }
     }
   }
 }

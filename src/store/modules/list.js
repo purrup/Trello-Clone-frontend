@@ -31,6 +31,10 @@ const mutations = {
   ADD_CARD (state, { data }) {
     state.list.forEach(list => {
       if (list._id === data.listId) {
+        if (!list.cards) {
+          list.cards = []
+          list.cards.push(data)
+        }
         list.cards.push(data)
       }
     })

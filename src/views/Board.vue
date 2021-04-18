@@ -23,7 +23,7 @@
 
         <div class="list flex">
           <input type="text"
-                class="p-2 mr-2 flex-grow bg-white border-none text-base"
+                class="p-2 mr-2 flex-grow bg-white border-none rounded text-base"
                 placeholder="+ 新增其他列表"
                 @keyup.enter="createList">
         </div>
