@@ -28,7 +28,7 @@
       </nav>
     </header>
     <main>
-      <div class="container text-center md:text-left h-full w-full md:w-4/5 image bg-top bg-no-repeat sm:bg-contain sm:bg-right">
+      <div class="container text-center md:text-left h-full w-full md:w-4/5 image bg-no-repeat md:bg-contain md:bg-right">
         <div class="w-full md:w-7/12 px-5 md:p-0 pt-10 flex flex-col items-center sm:items-start justify-center h-full">
           <h1 class="text-5xl sm:text-6xl font-extrabold pb-4 leading-tight">Trello 協助團隊推動工作進展。</h1>
           <p class="text-xl font-semibold leading-tight w-10/12">協同合作、管理專案並創造生產力的新高峰。從摩天樓到家庭辦公室，您的團隊工作方式都是獨一無二：借助 Trello 來完成一切工作。</p>
@@ -65,7 +65,13 @@ main {
 
 }
 .image {
-  background-image: url('../assets/pictures/board.svg');
-  background-size: 50%;
+  background-image: none;
 }
+@media (min-width: 768px) {
+  .image {
+    background-image: url('../assets/pictures/board.svg');
+    background-size: 50%;
+  }
+}
+
 </style>
