@@ -2,7 +2,7 @@
 
 Clone the core features of [Trello](https://trello.com/)
 ## Demo
-![](https://imgur.com/hgyLyBV)
+![](https://i.imgur.com/hgyLyBV.png)
 ## Live Demos
 
 https://trello-clone-frontend-2021.herokuapp.com/
