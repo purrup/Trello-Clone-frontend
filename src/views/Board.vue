@@ -16,7 +16,6 @@
               v-for="(list, index) of lists"
               :key="list._id ? list._id : index"
               :list="list"
-              :board="board"
               />
           </transition-group>
         </draggable>

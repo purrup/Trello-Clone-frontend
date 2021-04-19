@@ -52,7 +52,7 @@
 import ListCard from '@/components/ListCard.vue'
 import AutoTextarea from '@/components/AutoTextarea.vue'
 import draggable from 'vuedraggable'
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -78,11 +78,9 @@ export default {
     ...mapState('board', {
       board: state => state.board
     }),
-    ...mapState('list', {
-      lists: state => state.lists
-    }),
-    targetList () {
-      return this.$store.getters['list/getList'](this.list._id)
+    ...mapGetters('list', ['getList']),
+    currentList () {
+      return this.getList(this.list._id)
     },
     listTitle: {
       get () {
@@ -94,7 +92,7 @@ export default {
     },
     cards: {
       get () {
-        return this.targetList.cards
+        return this.currentList.cards
       },
       set (data) {
         this.MOVE_CARD({ listId: this.list._id, data })

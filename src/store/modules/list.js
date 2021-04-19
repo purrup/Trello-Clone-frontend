@@ -26,6 +26,8 @@ const mutations = {
     })
   },
   CREATE_LIST (state, { data }) {
+    // 後端傳來的list中沒有cards, 在這手動新增card property，否則一開始新增card時，無法render出第一張card
+    data.cards = []
     state.lists.push(data)
   },
   DELETE_LIST (state, { id }) {
@@ -34,11 +36,6 @@ const mutations = {
   ADD_CARD (state, { data }) {
     state.lists.forEach(list => {
       if (list._id === data.listId) {
-        if (!list.cards) {
-          list.cards = []
-          list.cards.push(data)
-          return
-        }
         list.cards.push(data)
       }
     })

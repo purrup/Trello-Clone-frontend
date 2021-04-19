@@ -1,6 +1,8 @@
 # Trello Clone
 
 Clone the core features of [Trello](https://trello.com/)
+## Demo
+![](https://imgur.com/hgyLyBV)
 ## Live Demos
 
 https://trello-clone-frontend-2021.herokuapp.com/
