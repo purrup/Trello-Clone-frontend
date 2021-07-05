@@ -1,14 +1,43 @@
 # Trello Clone
 
 Clone the core features of [Trello](https://trello.com/)
-
-## ![Demo](http://g.recordit.co/JrLpsUB1Zh.gif)
-
+## Demo
+![](https://i.imgur.com/hgyLyBV.png)
 ## Live Demos
 
-https://trello-clone-vin.netlify.app/
+https://trello-clone-frontend-2021.herokuapp.com/
+
+### User story
+
+##### 未註冊的使用者可以：
+
+* 瀏覽首頁
+* 使用試用帳戶登入，無需註冊立即試用Trello-Clone
+* 註冊個人帳戶
+
+##### 已註冊且登入的使用者可以：
+
+* 新增、刪除一個或多個看板
+* 修改看板名稱
+* 在看板中新增一個或多個的列表
+* 在列表中新增一個或多個的卡片
+* 在卡片中填寫相關描述
+* 刪除列表
+* 刪除卡片
+* 藉由拖曳列表，改變列表在看板內的排列順序
+* 藉由拖曳卡片，改變卡片在列表內的排列順序
+* 在列表之間拖曳卡片
+* 瀏覽個人檔案
+
+### Upcoming features
+
+* 可以邀請其他使用者共同協作看板
 
 ### Installing
+
+```
+git clone https://github.com/purrup/Trello-Clone-frontend.git
+```
 
 ```
 npm install
@@ -40,4 +69,4 @@ npm run lint
 
 ## Authors
 
-* **Vin** - *Initial work* - [purrup](https://github.com/purrup)
+* **Vin** - *Initial work* - [GitHub](https://github.com/purrup)

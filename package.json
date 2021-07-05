@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-css": "tailwindcss build ./src/assets/css/tailwind.css -o ./public/tailwind.css"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
@@ -13,24 +14,30 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/vue-fontawesome": "^0.1.5",
-    "autoprefixer": "^9.8.6",
-    "tailwindcss": "^1.7.6",
+    "@tailwindcss/forms": "^0.3.2",
+    "axios": "^0.21.1",
+    "node-sass": "^5.0.0",
+    "nprogress": "^0.2.0",
+    "sass-loader": "^10.1.1",
+    "vee-validate": "^3.4.5",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
+    "vue-tailwind": "^2.1.7",
     "vuedraggable": "^2.24.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^2.1.0",
-    "@fullhuman/vue-cli-plugin-purgecss": "~2.2.0",
-    "@ky-is/vue-cli-plugin-tailwind": "^1.6.0",
+    "@tailwindcss/postcss7-compat": "^2.1.0",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-eslint": "^3.5.0",
-    "@vue/cli-service": "^3.5.0",
+    "@vue/cli-service": "^4.5.12",
     "@vue/eslint-config-standard": "^4.0.0",
+    "autoprefixer": "^9.8.6",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.0",
     "vue-cli-plugin-fontawesome": "^0.2.0",
     "vue-template-compiler": "^2.5.21"
   }

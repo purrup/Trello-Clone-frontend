@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.list {
+  @apply bg-list-gray p-2 mr-4 text-left shadow rounded;
+  min-width: 300px;
+  max-width: 300px;
+},
+
+.signup-login-input {
+  @apply w-full text-gray-800 placeholder-gray-400 font-bold bg-gray-50 border-gray-300;
+}
+
+.signup-login-input:hover {
+  @apply bg-gray-100;
+}
